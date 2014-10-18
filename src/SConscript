@@ -1,0 +1,6 @@
+# Import the environment configured in SConstruct
+Import('env')
+
+# Executable Binaries
+env.Program('engine', 'main.c', LIBS=[ 'SDL2'], LIBPATH='.', RPATH=env.Literal('\\$$ORIGIN'))
+
