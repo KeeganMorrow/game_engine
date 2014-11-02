@@ -1,6 +1,19 @@
 # Import the environment configured in SConstruct
 Import('env')
 
-# Executable Binaries
-env.Program('engine', 'main.cpp', LIBS=[ 'SDL2', 'SDL2_image'], LIBPATH='.', RPATH=env.Literal('\\$$ORIGIN'))
+#Source files in this directory
+engineobjects = ['main.cpp']
 
+# Read child SConscript files and get their object files
+for subdir in ['core']:
+    o = env.SConscript('%s/SConscript' % subdir, {'env': env})
+    engineobjects.append(o)
+
+engineLibs = [
+    'log4cplus',
+    'SDL2',
+    'SDL2_image'
+    ]
+
+# Executable Binaries
+env.Program('engine', engineobjects, LIBS=engineLibs, LIBPATH='.', RPATH=env.Literal('\\$$ORIGIN'))
