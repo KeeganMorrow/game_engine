@@ -24,6 +24,11 @@ else:
     env.Append(CCFLAGS='-Og')
     env.Append(CCFLAGS='-g')
 
+#Set general purpose environment variables
+env.Append(CPPPATH=['#src/include'])
+env.Append(CPATH=['#src/include'])
+env.Append(CXXFLAGS='-std=c++11')
+
 # Run the lower level build files
 SConscript('src/SConscript',
     variant_dir=variant_dir,
