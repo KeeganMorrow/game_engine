@@ -2,5 +2,5 @@
 Import('env')
 
 # Executable Binaries
-env.Program('engine', 'main.c', LIBS=[ 'SDL2', 'SDL2_image'], LIBPATH='.', RPATH=env.Literal('\\$$ORIGIN'))
+env.Program('engine', 'main.cpp', LIBS=[ 'SDL2', 'SDL2_image'], LIBPATH='.', RPATH=env.Literal('\\$$ORIGIN'))
 
