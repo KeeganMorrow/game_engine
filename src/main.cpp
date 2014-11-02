@@ -1,3 +1,4 @@
+// Copyright 2014 Keegan Morrow
 // Example program:
 // Using SDL2 to create an application window
 
@@ -6,20 +7,18 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) {
-
     SDL_Window *pWindow;                    // Declare a pointer
 
     SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 
     // Create an application window with the following settings:
     pWindow = SDL_CreateWindow(
-        "An SDL2 window",                  // window title
-        SDL_WINDOWPOS_UNDEFINED,           // initial x position
-        SDL_WINDOWPOS_UNDEFINED,           // initial y position
-        640,                               // width, in pixels
-        480,                               // height, in pixels
-        SDL_WINDOW_OPENGL                  // flags - see below
-    );
+        "An SDL2 window",
+        SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED,
+        640,
+        480,
+        SDL_WINDOW_OPENGL);
 
     // Check that the window was successfully made
     if (pWindow == NULL) {
@@ -28,12 +27,17 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    SDL_Renderer *pRenderer = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    SDL_Renderer *pRenderer = SDL_CreateRenderer(
+        pWindow,
+        -1,
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    SDL_Texture *pTexture = IMG_LoadTexture(pRenderer, "resources/testimage.png");
+    SDL_Texture *pTexture = IMG_LoadTexture(
+        pRenderer,
+        "resources/testimage.png");
 
-    if ( pTexture == NULL ){
-        printf ("Oh balls.");
+    if ( pTexture == NULL ) {
+        printf("Oh balls.");
     }
 
     SDL_Rect dst;
