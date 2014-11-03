@@ -7,6 +7,8 @@
 
 namespace logging {
 
+    LoggerManager Manager;
+
     LoggerManager::LoggerManager() {
         log4cplus::BasicConfigurator config;
         config.configure();

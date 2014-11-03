@@ -18,6 +18,8 @@ namespace logging {
     private:
         std::map<std::string, log4cplus::Logger> loggers;
     };
+
+    extern LoggerManager Manager;
 };
 
 #endif  // _CORE_LOGGING_H_
