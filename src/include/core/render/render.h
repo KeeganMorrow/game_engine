@@ -6,10 +6,19 @@
 #include "core/logging/logging.h"
 
 namespace render {
+
+    class Renderer;
+
+    void RenderInit(uint16_t winwidth, uint16_t winheight);
+    void RenderDeInit();
+
+    extern Renderer *pRenderer;
+
     class Renderer {
     public:
         bool Init(uint16_t winwidth, uint16_t winheight);
         bool DeInit();
+    protected:
         Renderer() {}
         Renderer(uint16_t winwidth, uint16_t winheight) {
             Init(winwidth, winheight);
@@ -17,11 +26,12 @@ namespace render {
         ~Renderer() {
             DeInit();
         }
+        friend void RenderInit(uint16_t, uint16_t);
     private:
         bool isinitialized = false;
         SDL_Window *pwindow = nullptr;
         SDL_Renderer *prenderer = nullptr;
-        log4cplus::Logger logger = logging::Manager.getLogger("render");;
+        log4cplus::Logger logger = logging::Manager.getLogger("render");
     };
 };
 #endif  // _CORE_RENDER_H_

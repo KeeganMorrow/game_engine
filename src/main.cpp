@@ -14,11 +14,11 @@ int main(int argc, char* argv[]) {
 
     log4cplus::Logger logger = pLogManager->getLogger("logger");
 
-    render::Renderer *pRenderer = new render::Renderer(640, 480);
+    render::RenderInit(640,480);
 
     SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
 
-    delete pRenderer;
+    render::RenderDeInit();
 
     delete pLogManager;
 

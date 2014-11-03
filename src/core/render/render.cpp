@@ -10,6 +10,20 @@
 
 namespace render {
 
+    Renderer *pRenderer = nullptr;
+
+    void RenderInit(uint16_t winwidth, uint16_t winheight) {
+        pRenderer = new Renderer(winwidth, winheight);
+    }
+
+    void RenderDeInit() {
+        if (pRenderer != nullptr) {
+            pRenderer->DeInit();
+        } else {
+            //  This shouldn't happen
+        }
+    }
+
     bool Renderer::Init(uint16_t winwidth, uint16_t winheight) {
         if (isinitialized){
             LOG4CPLUS_WARN(logger,
