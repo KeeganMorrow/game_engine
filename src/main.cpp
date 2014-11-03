@@ -5,9 +5,16 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
+#include "core/logging/logging.h"
 
 int main(int argc, char* argv[]) {
     SDL_Window *pWindow;                    // Declare a pointer
+
+    logging::LoggerManager *pLogManager = new logging::LoggerManager();
+
+    log4cplus::Logger logger = pLogManager->getLogger("logger");
+
+    LOG4CPLUS_WARN(logger, "lololololol");
 
     SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 
