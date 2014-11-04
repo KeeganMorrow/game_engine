@@ -52,18 +52,17 @@ namespace render {
             return false;
         }
 
-        SDL_Renderer *prenderer = SDL_CreateRenderer(
+        prenderer = SDL_CreateRenderer(
             pwindow,
             -1,
             SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-        if (prenderer = nullptr) {
+        if (prenderer == nullptr) {
             // In the event that the renderer could not be created
             LOG4CPLUS_ERROR(logger,
                 "Could not create renderer: " << SDL_GetError());
             DeInit();
             return false;
-
         }
         isinitialized = true;
         return true;
