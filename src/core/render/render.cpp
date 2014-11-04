@@ -84,4 +84,14 @@ namespace render {
         // Clean up
         SDL_Quit();
     }
+
+    void Renderer::renderTexture(SDL_Texture *ptex, int x,
+                                 int y, int w, int h) {
+        SDL_Rect dst;
+        dst.x = x;
+        dst.y = y;
+        dst.w = w;
+        dst.h = h;
+        SDL_RenderCopy(prenderer, ptex, NULL, &dst);
+    }
 };

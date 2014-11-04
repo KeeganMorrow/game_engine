@@ -16,12 +16,19 @@ namespace render {
 
     extern log4cplus::Logger logger;
 
+    /* Note: A key assumption with this renderer class is that
+       There will only be 1 renderer per window. If this is not
+       true then it will need to be re-thought */
     class Renderer {
     public:
         bool Init(uint16_t winwidth, uint16_t winheight);
         bool DeInit();
         SDL_Renderer *getRenderer(void) {
             return prenderer;
+        }
+        void renderTexture(SDL_Texture *ptex, int x, int y, int w, int h);
+        inline void presentRenderer() {
+            SDL_RenderPresent(prenderer);
         }
     protected:
         Renderer() {}
