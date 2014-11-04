@@ -20,6 +20,9 @@ namespace render {
     public:
         bool Init(uint16_t winwidth, uint16_t winheight);
         bool DeInit();
+        SDL_Renderer *getRenderer(void){
+            return prenderer;
+        }
     protected:
         Renderer() {}
         Renderer(uint16_t winwidth, uint16_t winheight) {
