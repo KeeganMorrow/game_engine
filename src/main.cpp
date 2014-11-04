@@ -20,7 +20,19 @@ int main(int argc, char* argv[]) {
 
     management::ContentManager *pContent = new management::ContentManager();
 
-    pContent->addContent("resources/testimage.png", management::CONTENT_TYPE_TEXTURE);
+    pContent->addContent("resources/testimage.png",
+        management::CONTENT_TYPE_TEXTURE);
+
+    SDL_Texture *pTexture = pContent->getTexture(
+       "resources/testimage.png");
+
+    if (pTexture == nullptr) {
+        LOG4CPLUS_WARN(logger, "Failed loading texture");
+    } else {
+        render::pRenderer->renderTexture(pTexture, 100, 100, 100, 100);
+    }
+
+    render::pRenderer->presentRenderer();
 
     SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
 
