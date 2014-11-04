@@ -10,6 +10,8 @@
 
 namespace render {
 
+    log4cplus::Logger logger = logging::Manager.getLogger("render");
+
     Renderer *pRenderer = nullptr;
 
     void RenderInit(uint16_t winwidth, uint16_t winheight) {

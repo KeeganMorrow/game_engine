@@ -14,6 +14,8 @@ namespace render {
 
     extern Renderer *pRenderer;
 
+    extern log4cplus::Logger logger;
+
     class Renderer {
     public:
         bool Init(uint16_t winwidth, uint16_t winheight);
@@ -31,7 +33,6 @@ namespace render {
         bool isinitialized = false;
         SDL_Window *pwindow = nullptr;
         SDL_Renderer *prenderer = nullptr;
-        log4cplus::Logger logger = logging::Manager.getLogger("render");
     };
 };
 #endif  // _CORE_RENDER_H_
