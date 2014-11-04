@@ -20,8 +20,8 @@ int main(int argc, char* argv[]) {
 
     management::ContentManager *pContent = new management::ContentManager();
 
-    pContent->addContent("resources/testimage.png",
-        management::CONTENT_TYPE_TEXTURE);
+    pContent->addTexture("resources/testimage.png");
+    //pContent->addTexture("resources/testimage2.png");
 
     SDL_Texture *pTexture = pContent->getTexture(
        "resources/testimage.png");
@@ -33,6 +33,8 @@ int main(int argc, char* argv[]) {
     }
 
     render::pRenderer->presentRenderer();
+
+    pContent->removeTexture("resources/testimage.png");
 
     SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
 
