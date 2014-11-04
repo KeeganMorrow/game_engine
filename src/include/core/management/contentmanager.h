@@ -5,6 +5,8 @@
 
 #include <unordered_map>
 #include <string>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include "core/logging/logging.h"
 
 namespace management {
@@ -17,36 +19,20 @@ namespace management {
 
     extern log4cplus::Logger logger;
 
-    // TODO(Keegan): Come up with a way to avoid casting
+    template <class K>
+    struct ContentMap: public std::map<std::string, K> {};
 
-    class Content {
-    public:
-        explicit Content(void *pContent, uint32_t size):
-            pContent(pContent), size(size) {}
-
-    protected:
-        void *getContent(void) {
-            return pContent;
-        }
-
-        void getContentSize(void) {
-            uint32_t size;
-        }
-    private:
-        void *pContent;
-        uint32_t size;
-    };
-
-    typedef std::unordered_map<std::string, Content*> ContentMap;
+    template <class K>
+    struct ContentPair: public std::pair<std::string, K> {};
 
     class ContentManager {
     public:
         ContentManager() {}
-        Content *getContent(std::string path, ContentType type);
+        SDL_Texture *getTexture(std::string path);
         bool removeContent(std::string);
         bool addContent(std::string path, ContentType type);
     private:
-        ContentMap map;
+        ContentMap<SDL_Texture*> textures;
     };
 };
 
