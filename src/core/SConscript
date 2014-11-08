@@ -2,7 +2,7 @@
 Import('env')
 
 objects = []
-for subdir in ['logging', 'management', 'render']:
+for subdir in ['input','logging', 'management', 'render']:
     o = env.SConscript('%s/SConscript' % subdir, {'env': env})
     objects.append(o)
 #env.Library('core', objs)
