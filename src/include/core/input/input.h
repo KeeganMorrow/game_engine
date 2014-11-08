@@ -6,62 +6,28 @@
 #include <SDL2/SDL.h>
 #include <vector>
 
-namespace core {
+#include "core/logging/logging.h"
 
-    typedef enum {
-        EVENT_TYPE_NONE = 0,
-        EVENT_TYPE_KEY,
-        EVENT_TYPE_MOUSE,
-        EVENT_TYPE_JOYAXIS,
-        EVENT_TYPE_JOYBUTTON,
-        EVENT_TYPE_TOUCH,
-        EVENT_TYPE_RENDER,
-        EVENT_TYPE_QUIT,
-        EVENT_TYPE_COUNT
-    }EventType;
+namespace input {
 
-    struct HandledEvents {
-        unsigned char
-            key : 1,
-            mouse : 1,
-            joyaxis : 1,
-            joybutton : 1,
-            touch : 1,
-            render : 1,
-            quit : 1;
-    };
+    extern log4cplus::Logger logger;
 
-    typedef bool EventHandler(SDL_Event *pevent);
-
-    class InputRegistration {
+    class EventHandler {
     public:
-        InputRegistration(EventHandler phandler, HandledEvents handledtypes)
-         : phandler(phandler), handledtypes(handledtypes) {}
+        virtual bool isEventHandled(uint32_t eventtype) = 0;
 
-        HandledEvents getHandledEvents() {
-            return handledtypes;
-        }
-
-        bool isEventHandled(EventType eventtype);
-
-        bool handleEvent(SDL_Event *pevent) {
-            return phandler(pevent);
-        }
-
-    private:
-        EventHandler *phandler;
-        HandledEvents handledtypes;
+        virtual bool handleEvent(SDL_Event *pevent) = 0;
     };
 
     class InputController {
     public:
-        InputController(void);
+        InputController(void) {}
         ~InputController();
         bool handleInput(void);
-        bool registerInput(EventHandler handler,
-            struct HandledEvents eventtypes);
+        bool registerInput(EventHandler *phandler);
+        bool unregisterInput(EventHandler *phandler);
     private:
-        std::vector<InputRegistration>inputhandlers;
+        std::vector<EventHandler*>inputhandlers;
     };
 };
 
