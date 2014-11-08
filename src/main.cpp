@@ -5,7 +5,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
+#include "core/input/input.h"
 #include "core/logging/logging.h"
+#include "core/loop/loop.h"
 #include "core/render/render.h"
 #include "core/management/contentmanager.h"
 
@@ -36,7 +38,13 @@ int main(int argc, char* argv[]) {
 
     pContent->removeTexture("resources/testimage.png");
 
-    SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
+    input::InputController *pinputcontroller = new input::InputController();
+
+    loop::LoopManager *ploopmanager = new loop::LoopManager(pinputcontroller);
+
+    ploopmanager->init();
+
+    ploopmanager->runLoop();
 
     render::RenderDeInit();
 
