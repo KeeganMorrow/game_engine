@@ -12,18 +12,16 @@
 #include "core/management/contentmanager.h"
 
 int main(int argc, char* argv[]) {
-    SDL_Window *pWindow;                    // Declare a pointer
-
     logging::LoggerManager *pLogManager = new logging::LoggerManager();
 
     log4cplus::Logger logger = pLogManager->getLogger("logger");
 
-    render::RenderInit(640,480);
+    render::RenderInit(640, 480);
 
     management::ContentManager *pContent = new management::ContentManager();
 
     pContent->addTexture("resources/testimage.png");
-    //pContent->addTexture("resources/testimage2.png");
+    // pContent->addTexture("resources/testimage2.png");
 
     SDL_Texture *pTexture = pContent->getTexture(
        "resources/testimage.png");

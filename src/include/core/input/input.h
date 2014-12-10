@@ -17,6 +17,8 @@ namespace input {
         virtual bool isEventHandled(uint32_t eventtype) = 0;
 
         virtual bool handleEvent(SDL_Event *pevent) = 0;
+
+        virtual ~EventHandler() {}
     };
 
     class InputController {

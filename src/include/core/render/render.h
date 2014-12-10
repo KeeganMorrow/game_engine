@@ -45,4 +45,5 @@ namespace render {
         SDL_Renderer *prenderer = nullptr;
     };
 };
+
 #endif  // _CORE_RENDER_H_

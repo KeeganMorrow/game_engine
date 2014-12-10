@@ -11,10 +11,11 @@ namespace logging {
 
     const std::string logconfig_path = "loggers.conf";
 
+    // TODO(KM, "Rethink the design of this class")
     class LoggerManager {
     public:
         LoggerManager();
-        log4cplus::Logger getLogger(std::string loggername);
+        static log4cplus::Logger getLogger(std::string loggername);
     private:
         std::map<std::string, log4cplus::Logger> loggers;
     };

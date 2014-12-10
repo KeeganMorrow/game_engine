@@ -20,8 +20,8 @@ namespace loop {
 
     class LoopManager : public input::EventHandler {
     public:
-        LoopManager(input::InputController *pinput) : pinput(pinput) {}
-        ~LoopManager();
+        explicit LoopManager(input::InputController *pinput) : pinput(pinput) {}
+        virtual ~LoopManager() {}
         void init();
         // TODO(KM, Add an exit code?)
         void runLoop();

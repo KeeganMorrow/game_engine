@@ -8,9 +8,7 @@ namespace input {
 
     log4cplus::Logger logger = logging::Manager.getLogger("input");
 
-    InputController::~InputController(){
-
-    }
+    InputController::~InputController() {}
 
     bool InputController::handleInput(void) {
         SDL_Event e;

@@ -27,7 +27,7 @@ namespace render {
     }
 
     bool Renderer::Init(uint16_t winwidth, uint16_t winheight) {
-        if (isinitialized){
+        if (isinitialized) {
             LOG4CPLUS_WARN(logger,
                 "Re-Initializing Renderer");
             DeInit();
