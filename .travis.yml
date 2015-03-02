@@ -1,6 +1,15 @@
+before_install:
+  - yes | sudo add-apt-repository ppa:zoogie/sdl2-snapshots
+  - yes | sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
+install:
+  - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev liblog4cplus-dev gcc-4.8 g++-4.8
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
 language: cpp
+
 compiler:
   - gcc
   - clang
-script: scons
 
+script:
+  - scons
