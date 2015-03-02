@@ -1,0 +1,12 @@
+# Import the environment configured in SConstruct
+Import('env')
+
+#Source files in this directory
+engineobjects = ['main.cpp']
+
+#TODO: Seperate this out from other library environments
+env.Append(CPPPATH=['gtest-1.7.0/include'])
+env.Append(CPPPATH=['gtest-1.7.0/'])
+
+# Executable Binaries
+env.StaticLibrary('gtest', 'gtest-1.7.0/src/gtest-all.cc', LIBS='pthreads', LIBPATH='.', RPATH=env.Literal('\\$$ORIGIN'))

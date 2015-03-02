@@ -29,9 +29,17 @@ env.Append(CPPPATH=['#src/include'])
 env.Append(CPATH=['#src/include'])
 env.Append(CXXFLAGS='-std=c++11')
 
+#Build Libraries
+#TODO: Rethink passing the debug flags to libraries
+SConscript('lib/SConscript',
+    variant_dir=variant_dir + '/lib',
+    duplicate=0,
+    exports="env")
+
 # Run the lower level build files
 SConscript('src/SConscript',
     variant_dir=variant_dir,
     duplicate=0,
     exports="env")
+
 
