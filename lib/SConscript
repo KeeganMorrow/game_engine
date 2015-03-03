@@ -13,4 +13,4 @@ gtestenv.Append(CPPPATH=['gmock/include'])
 gtestenv.Append(CPPPATH=['gmock/'])
 
 # Staticlibrary Libraries
-gtestenv.StaticLibrary(target ='gmock', source = ['gmock/src/gmock-all.cc', 'gtest/src/gtest-all.cc'], LIBS = 'pthreads', LIBPATH = '.', RPATH = env.Literal('\\$$ORIGIN'))
+gtestenv.StaticLibrary(target ='gmock', source = ['gmock/src/gmock-all.cc', 'gtest/src/gtest-all.cc'], LIBS = 'pthreads')
