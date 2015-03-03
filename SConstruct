@@ -42,4 +42,5 @@ SConscript('src/SConscript',
     duplicate=0,
     exports="env")
 
-
+#Set up the default
+Default('src')

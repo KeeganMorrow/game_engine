@@ -18,4 +18,7 @@ engineLibs = [
     ]
 
 # Executable Binaries
-localenv.Program('engine', engineobjects, LIBS=engineLibs, LIBPATH='.', RPATH=localenv.Literal('\\$$ORIGIN'))
+engine = localenv.Program('engine', engineobjects, LIBS=engineLibs, LIBPATH='.', RPATH=localenv.Literal('\\$$ORIGIN'))
+
+# 'src' isn't very descriptive
+env.Alias('engine', engine)
