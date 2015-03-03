@@ -6,11 +6,11 @@ gtestenv = env.Clone()
 #Source files in this directory
 engineobjects = ['main.cpp']
 
-gtestenv.Append(CPPPATH=['gtest-1.7.0/include'])
-gtestenv.Append(CPPPATH=['gtest-1.7.0/'])
+gtestenv.Append(CPPPATH=['gtest/include'])
+gtestenv.Append(CPPPATH=['gtest/'])
 
-gtestenv.Append(CPPPATH=['gmock-1.7.0/include'])
-gtestenv.Append(CPPPATH=['gmock-1.7.0/'])
+gtestenv.Append(CPPPATH=['gmock/include'])
+gtestenv.Append(CPPPATH=['gmock/'])
 
 # Staticlibrary Libraries
 gtestenv.StaticLibrary(target ='gmock', source = ['gmock/src/gmock-all.cc', 'gtest/src/gtest-all.cc'], LIBS = 'pthreads', LIBPATH = '.', RPATH = env.Literal('\\$$ORIGIN'))
