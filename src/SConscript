@@ -1,12 +1,14 @@
 # Import the environment configured in SConstruct
 Import('env')
 
+localenv = env.Clone()
+
 #Source files in this directory
 engineobjects = ['main.cpp']
 
 # Read child SConscript files and get their object files
 for subdir in ['core']:
-    o = env.SConscript('%s/SConscript' % subdir, {'env': env})
+    o = localenv.SConscript('%s/SConscript' % subdir, {'env': localenv})
     engineobjects.append(o)
 
 engineLibs = [
@@ -16,4 +18,4 @@ engineLibs = [
     ]
 
 # Executable Binaries
-env.Program('engine', engineobjects, LIBS=engineLibs, LIBPATH='.', RPATH=env.Literal('\\$$ORIGIN'))
+localenv.Program('engine', engineobjects, LIBS=engineLibs, LIBPATH='.', RPATH=localenv.Literal('\\$$ORIGIN'))
