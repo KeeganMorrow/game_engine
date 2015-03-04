@@ -1,13 +1,33 @@
+import os
+
 # Import the environment configured in SConstruct
 Import('env')
 
 localenv = env.Clone()
 
 localenv.Append(CPPDEFINES = 'LOG4CPLUS_DISABLE_FATAL')
-# Would like to add gtest includes here if I can
-
+localenv.Append(CPPPATH=['#lib/gtest/include'])
+localenv.Append(CPPPATH=['#lib/gmock/include'])
+localenv.Append(CPPPATH=['#src/include'])
 
 # Run the child files!
+tests = []
 for subdir in ['samples']:
-    print "found dir %s" % subdir
     o = localenv.SConscript('%s/SConscript' % subdir, {'env': localenv})
+    if o:
+        tests.extend(o)
+
+for test in tests:
+    testpath = str(test)
+    print testpath
+    no_ext = os.path.splitext(testpath)[0]
+    basename,dirname = os.path.split(no_ext)
+    testname = no_ext.replace('/', '_') + '_test'
+
+    srcpath = '../src/' + no_ext + '.cpp'
+
+    print "no_ext is %s basename is %s dirname is %s testname is %s srcpath is %s" % (no_ext, basename, dirname, testname, srcpath)
+
+    testprogram = localenv.Object('testprog'+basename, 'runtests.cpp')
+    testee = localenv.Object(basename, srcpath)
+    tester = localenv.Program(testname, [testpath, testee, testprogram], LIBS=['gmock', 'pthread'])

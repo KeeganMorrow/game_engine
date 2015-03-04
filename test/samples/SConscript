@@ -1,16 +1,6 @@
 # Import the environment configured in SConstruct
 Import('env')
 
-localenv = env.Clone()
-
-# Would like to add gtest includes here if I can
-localenv.Append(CPPPATH=['../../lib/gtest/include'])
-localenv.Append(CPPPATH=['../../lib/gmock/include'])
-localenv.Append(CPPPATH=['../../src/include'])
-
-print "Current directory is %s" % Dir('.').path
-
-testee = localenv.Object('sample1', '../../src/samples/sample1.cpp')
-testprogram = localenv.Object('testprog-sample1', '../runtests.cpp')
-
-tester = localenv.Program('sample1_test', ['sample1_unittest.cpp', testee, testprogram], LIBS=['gmock', 'pthread'])
+# Return a list of the source files to be used in this directory
+objects = env.Object(['sample1.cpp'])
+Return('objects')
