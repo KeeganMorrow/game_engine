@@ -1,0 +1,13 @@
+# Import the environment configured in SConstruct
+Import('env')
+
+localenv = env.Clone()
+
+localenv.Append(CPPDEFINES = 'LOG4CPLUS_DISABLE_FATAL')
+# Would like to add gtest includes here if I can
+
+
+# Run the child files!
+for subdir in ['samples']:
+    print "found dir %s" % subdir
+    o = localenv.SConscript('%s/SConscript' % subdir, {'env': localenv})

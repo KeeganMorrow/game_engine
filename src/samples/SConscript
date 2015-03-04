@@ -1,0 +1,6 @@
+# Import the environment configured in SConstruct
+Import('env')
+
+# Return a list of the source files to be used in this directory
+objects = env.Object(['sample1.cpp'])
+Return('objects')
