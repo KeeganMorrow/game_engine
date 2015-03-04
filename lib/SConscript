@@ -1,10 +1,21 @@
 # Import the environment configured in SConstruct
 Import('env')
 
+import os
+import subprocess
+import errno
+import re
+
+def make_sure_path_exists(path):
+    try:
+        os.makedirs(path)
+    except OSError as exception:
+        if exception.errno != errno.EEXIST:
+            raise
+
 gtestenv = env.Clone()
 
-#Source files in this directory
-engineobjects = ['main.cpp']
+entityxenv = env.Clone()
 
 gtestenv.Append(CPPPATH=['gtest/include'])
 gtestenv.Append(CPPPATH=['gtest/'])
@@ -14,3 +25,30 @@ gtestenv.Append(CPPPATH=['gmock/'])
 
 # Staticlibrary Libraries
 gtestenv.StaticLibrary(target ='gmock', source = ['gmock/src/gmock-all.cc', 'gtest/src/gtest-all.cc'], LIBS = 'pthreads')
+
+entityx_path = Dir('.').srcnode().path + '/entityx'
+
+print "entityx_path is %s" % entityx_path
+
+cmakeflags = ''
+
+#TODO: Remember you can pass more info into the environment if necessary
+def CMaker(target, source, env):
+    """target should be path from repository root to the build directory.
+       source should be path from repository root to CMake project directory.
+       env should be flags to provide to cmake
+    """
+    entityx_build_path = str(target[0])
+    entityx_source_path = str(source[0])
+    entityx_source_path = "/home/keegan/development/game_engine/lib/entityx"
+    cmake_args = ""
+
+    print "build \"%s\" source \"%s\"" % (entityx_build_path, entityx_source_path)
+
+    make_sure_path_exists(entityx_build_path)
+
+    subprocess.call(['cmake', cmake_args, entityx_source_path], cwd=entityx_build_path)
+    subprocess.call(['make'], cwd=entityx_build_path)
+
+entityx = entityxenv.Command('entityx', 'entityx/CMakeLists.txt', CMaker)
+AlwaysBuild(entityx)
