@@ -14,8 +14,8 @@ for subdir in ['core', 'samples']:
 engineLibs = [
     'log4cplus',
     'SDL2',
-    'SDL2_image'
-    ]
+    'SDL2_image',
+    'entityx']
 
 # Executable Binaries
 engine = localenv.Program('engine', engineobjects, LIBS=engineLibs, LIBPATH='.')
