@@ -18,7 +18,7 @@ engineLibs = [
     'entityx']
 
 # Executable Binaries
-engine = localenv.Program('engine', engineobjects, LIBS=engineLibs, LIBPATH='.')
+engine = localenv.Program('engine', engineobjects, LIBS=engineLibs)
 
 # 'src' isn't very descriptive
 env.Alias('engine', engine)
