@@ -1,5 +1,4 @@
 import os
-
 # Import the environment configured in SConstruct
 Import('env')
 
@@ -12,16 +11,18 @@ localenv.Append(CPPPATH=['#src/include'])
 
 # Run the child files!
 tests = []
-
+alltestmodules = []
 for root, dirs, files in os.walk(Dir('.').srcnode().abspath):
     for file in files:
         if file.endswith(".cpp"):
              if file !=  "runtests.cpp":
-                 path=str(os.path.relpath(os.path.join(root,file),Dir('.').srcnode().abspath).replace(".cpp", ".o"))
+                 path=str(os.path.relpath(os.path.join(root,file),Dir('.').srcnode().abspath))
                  print "found test_target in location \"%s\"" % path
                  tests.append(path)
 
-
+alltestmodules = []
+# Build individual test programs and get ready to build all tests
+# TODO: ALlow selection of tests (ie test/core/management)
 for test in tests:
     testpath = str(test)
     print testpath
@@ -30,9 +31,20 @@ for test in tests:
     testname = no_ext.replace('/', '_') + '_test'
 
     srcpath = '../src/' + no_ext + '.cpp'
+    print "no_ext is \"%s\" basename is \"%s\" dirname is \"%s\" testname is \"%s\" srcpath is \"%s\"" % (no_ext, basename, dirname, testname, srcpath)
 
-    print "no_ext is %s basename is %s dirname is %s testname is %s srcpath is %s" % (no_ext, basename, dirname, testname, srcpath)
+    # We will need to build these multiple times, so create objects for them
+    testprogram = localenv.Object('testexec_'+basename, 'runtests.cpp')
+    module = localenv.Object('test_' + basename, srcpath)
+    tester = localenv.Program(testname, [testpath, module, testprogram], LIBS=['gmock', 'pthread'])
 
-    testprogram = localenv.Object('testprog'+basename, 'runtests.cpp')
-    testee = localenv.Object(basename, srcpath)
-    tester = localenv.Program(testname, [testpath, testee, testprogram], LIBS=['gmock', 'pthread'])
+    allmodule = localenv.Object('alltest_' + basename, srcpath)
+    alltestmodules.append(allmodule)
+    alltest = localenv.Object('all_' + basename, testpath)
+    alltestmodules.append(alltest)
+
+alltestmodules.append('runtests.cpp')
+
+
+mastertest = localenv.Program("alltests", alltestmodules, LIBS=['gmock', 'pthread']);
+
