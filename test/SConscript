@@ -12,10 +12,15 @@ localenv.Append(CPPPATH=['#src/include'])
 
 # Run the child files!
 tests = []
-for subdir in ['samples']:
-    o = localenv.SConscript('%s/SConscript' % subdir, {'env': localenv})
-    if o:
-        tests.extend(o)
+
+for root, dirs, files in os.walk(Dir('.').srcnode().abspath):
+    for file in files:
+        if file.endswith(".cpp"):
+             if file !=  "runtests.cpp":
+                 path=str(os.path.relpath(os.path.join(root,file),Dir('.').srcnode().abspath).replace(".cpp", ".o"))
+                 print "found test_target in location \"%s\"" % path
+                 tests.append(path)
+
 
 for test in tests:
     testpath = str(test)
