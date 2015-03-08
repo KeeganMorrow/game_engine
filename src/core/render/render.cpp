@@ -4,8 +4,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "core/render/render.h"
-#include "core/logging/logging.h"
+#include "core/render/render.hpp"
+#include "core/logging/logging.hpp"
 
 namespace render {
 

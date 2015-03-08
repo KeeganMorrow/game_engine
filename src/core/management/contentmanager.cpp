@@ -2,9 +2,9 @@
 
 #include <string>
 #include <utility>
-#include "core/management/contentmanager.h"
-#include "core/render/render.h"
-#include "core/logging/logging.h"
+#include "core/management/contentmanager.hpp"
+#include "core/render/render.hpp"
+#include "core/logging/logging.hpp"
 
 namespace management {
 

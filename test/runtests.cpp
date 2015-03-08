@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "core/logging/logging.h"
+#include "core/logging/logging.hpp"
 
 int main(int argc, char **argv) {
     logging::LoggerManager *pLogManager = new logging::LoggerManager();

@@ -3,8 +3,8 @@
 #ifndef _CORE_LOOP_H
 #define _CORE_LOOP_H
 
-#include "core/input/input.h"
-#include "core/render/render.h"
+#include "core/input/input.hpp"
+#include "core/render/render.hpp"
 
 namespace loop {
 

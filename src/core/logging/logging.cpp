@@ -2,7 +2,7 @@
 
 #include <string>
 #include <iomanip>
-#include "core/logging/logging.h"
+#include "core/logging/logging.hpp"
 
 INITIALIZE_EASYLOGGINGPP
 

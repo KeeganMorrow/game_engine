@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SDL2/SDL_image.h>
 #include "core/render/surfaceManager.hpp"
-#include "core/logging/logging.h"
+#include "core/logging/logging.hpp"
 
 namespace render{
 

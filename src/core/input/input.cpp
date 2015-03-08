@@ -1,7 +1,7 @@
 // Copyright 2014 Keegan Morrow
 
 
-#include "core/input/input.h"
+#include "core/input/input.hpp"
 
 
 namespace input {

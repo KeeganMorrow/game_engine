@@ -1,8 +1,8 @@
 // Copyright 2014 Keegan Morrow
 
 
-#include "core/loop/loop.h"
-#include "core/logging/logging.h"
+#include "core/loop/loop.hpp"
+#include "core/logging/logging.hpp"
 
 
 namespace loop {

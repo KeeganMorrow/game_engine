@@ -2,7 +2,7 @@
 #define __CORE_APP_HPP
 
 #include <assert.h>
-#include "core/logging/logging.h"
+#include "core/logging/logging.hpp"
 
 namespace core{
 
