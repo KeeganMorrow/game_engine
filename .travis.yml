@@ -13,5 +13,5 @@ compiler:
   - gcc
 
 script:
-  - scons lib; scons test; scons engine
+  - scons lib; scons test; scons engine; ./build/debug/test/alltests
 
