@@ -1,7 +1,7 @@
 # Import the environment configured in SConstruct
 Import('env')
 
-objects = []
+objects = env.Object(['app.cpp', 'world.cpp'])
 for subdir in ['input','logging', 'loop', 'management', 'render']:
     o = env.SConscript('%s/SConscript' % subdir, {'env': env})
     objects.extend(o)

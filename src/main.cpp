@@ -10,47 +10,13 @@
 #include "core/loop/loop.h"
 #include "core/render/render.h"
 #include "core/management/contentmanager.h"
+#include "core/app.hpp"
 
 int main(int argc, char* argv[]) {
-    logging::LoggerManager *pLogManager = new logging::LoggerManager();
 
-    pLogManager->Init(argc,argv);
+    core::App mainApplication;
 
-    LOG(INFO) << "Yay, log info!";
-
-    render::RenderInit(640, 480);
-
-    management::ContentManager *pContent = new management::ContentManager();
-
-    pContent->addTexture("resources/testimage.png");
-    // pContent->addTexture("resources/testimage2.png");
-
-    SDL_Texture *pTexture = pContent->getTexture(
-       "resources/testimage.png");
-
-    if (pTexture == nullptr) {
-        //LOG(WARN) << "Failed loading texture";
-    } else {
-        render::pRenderer->renderTexture(pTexture, 100, 100, 100, 100);
-    }
-
-    render::pRenderer->presentRenderer();
-
-    pContent->removeTexture("resources/testimage.png");
-
-    input::InputController *pinputcontroller = new input::InputController();
-
-    loop::LoopManager *ploopmanager = new loop::LoopManager(pinputcontroller);
-
-    ploopmanager->init();
-
-    ploopmanager->runLoop();
-
-    render::RenderDeInit();
-
-    delete pContent;
-
-    delete pLogManager;
+    mainApplication.init(argc, argv);
 
     return 0;
 }
