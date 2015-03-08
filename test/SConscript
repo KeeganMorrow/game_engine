@@ -27,7 +27,7 @@ for test in tests:
     testpath = str(test)
     print testpath
     no_ext = os.path.splitext(testpath)[0]
-    basename,dirname = os.path.split(no_ext)
+    dirname,basename = os.path.split(no_ext)
     testname = no_ext.replace('/', '_') + '_test'
 
     srcpath = '../src/' + no_ext + '.cpp'
