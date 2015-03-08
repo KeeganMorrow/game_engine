@@ -36,7 +36,7 @@ for test in tests:
     # We will need to build these multiple times, so create objects for them
     testprogram = localenv.Object('testexec_'+basename, 'runtests.cpp')
     module = localenv.Object('test_' + basename, srcpath)
-    tester = localenv.Program(testname, [testpath, module, testprogram], LIBS=['gmock', 'pthread'])
+    tester = localenv.Program(testname, [testpath, module, testprogram], LIBS=['gmock', 'pthread', 'SDL2', 'SDL2_image'])
 
     allmodule = localenv.Object('alltest_' + basename, srcpath)
     alltestmodules.append(allmodule)
@@ -46,5 +46,5 @@ for test in tests:
 alltestmodules.append('runtests.cpp')
 
 
-mastertest = localenv.Program("alltests", alltestmodules, LIBS=['gmock', 'pthread']);
+mastertest = localenv.Program("alltests", alltestmodules, LIBS=['gmock', 'pthread', 'SDL2', 'SDL2_image']);
 
