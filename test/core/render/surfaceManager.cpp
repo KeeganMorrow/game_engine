@@ -5,7 +5,7 @@
 
 using namespace render;
 
-TEST(surfaceManagerer, Loader) {
+TEST(surfaceManager, Loader) {
     surfaceManager *manager = new surfaceManager();
     SDL_Surface *psurf1 = manager->requestSurface(std::string("resources/testimage.png"));
 
