@@ -5,6 +5,7 @@ Import('env')
 localenv = env.Clone()
 
 localenv.Append(CPPDEFINES = 'LOG4CPLUS_DISABLE_FATAL')
+localenv.Append(CPPPATH=['#lib/entityx'])
 localenv.Append(CPPPATH=['#lib/gtest/include'])
 localenv.Append(CPPPATH=['#lib/gmock/include'])
 localenv.Append(CPPPATH=['#src/include'])
