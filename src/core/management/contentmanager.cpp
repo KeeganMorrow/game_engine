@@ -7,8 +7,6 @@
 
 namespace management {
 
-    log4cplus::Logger logger = logging::Manager.getLogger("management");
-
     SDL_Texture *ContentManager::getTexture(std::string path) {
         auto it = textures.find(path);
         SDL_Texture *toreturn = it->second;
@@ -29,8 +27,8 @@ namespace management {
         SDL_Renderer *pRenderer = render::pRenderer->getRenderer();
         SDL_Texture *ptex = IMG_LoadTexture(pRenderer, path.c_str());
         if (ptex == nullptr) {
-        LOG4CPLUS_WARN(logger, "Failed loading texture " << path <<
-            " due to SDL error:" << IMG_GetError());
+        /*LOG4CPLUS_WARN(logger, "Failed loading texture " << path <<
+            " due to SDL error:" << IMG_GetError());*/
             return false;
         }
         addTexture(path, ptex);

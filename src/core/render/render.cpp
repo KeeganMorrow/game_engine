@@ -3,14 +3,11 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <log4cplus/loggingmacros.h>
 
 #include "core/render/render.h"
 #include "core/logging/logging.h"
 
 namespace render {
-
-    log4cplus::Logger logger = logging::Manager.getLogger("render");
 
     Renderer *pRenderer = nullptr;
 
@@ -28,12 +25,12 @@ namespace render {
 
     bool Renderer::Init(uint16_t winwidth, uint16_t winheight) {
         if (isinitialized) {
-            LOG4CPLUS_WARN(logger,
-                "Re-Initializing Renderer");
+            /*LOG4CPLUS_WARN(logger,
+                "Re-Initializing Renderer");*/
             DeInit();
         }
-            LOG4CPLUS_INFO(logger,
-                "Re-Initializing Renderer");
+           /* LOG4CPLUS_INFO(logger,
+                "Re-Initializing Renderer");*/
         SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 
         // Create an application window with the following settings:
@@ -48,8 +45,8 @@ namespace render {
         // Check that the window was successfully made
         if (pwindow == nullptr) {
             // In the event that the window could not be made...
-            LOG4CPLUS_ERROR(logger,
-                "Could not create window: " << SDL_GetError());
+           /* LOG4CPLUS_ERROR(logger,
+                "Could not create window: " << SDL_GetError());*/
             DeInit();
             return false;
         }
@@ -61,8 +58,8 @@ namespace render {
 
         if (prenderer == nullptr) {
             // In the event that the renderer could not be created
-            LOG4CPLUS_ERROR(logger,
-                "Could not create renderer: " << SDL_GetError());
+           /* LOG4CPLUS_ERROR(logger,
+                "Could not create renderer: " << SDL_GetError());*/
             DeInit();
             return false;
         }
@@ -71,8 +68,8 @@ namespace render {
 }
 
     bool Renderer::DeInit() {
-        LOG4CPLUS_INFO(logger,
-            "De-Initializing Renderer");
+        /*LOG4CPLUS_INFO(logger,
+            "De-Initializing Renderer");*/
         // Destroy the renderer
         if (prenderer) {
             SDL_DestroyRenderer(prenderer);

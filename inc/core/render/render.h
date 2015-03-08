@@ -14,8 +14,6 @@ namespace render {
 
     extern Renderer *pRenderer;
 
-    extern log4cplus::Logger logger;
-
     /* Note: A key assumption with this renderer class is that
        There will only be 1 renderer per window. If this is not
        true then it will need to be re-thought */

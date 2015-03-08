@@ -12,8 +12,6 @@
 
 namespace management {
 
-    extern log4cplus::Logger logger;
-
     template <class K>
     struct ContentMap: public std::unordered_map<std::string, K> {};
 

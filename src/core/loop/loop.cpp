@@ -6,8 +6,6 @@
 
 namespace loop {
 
-    log4cplus::Logger logger = logging::Manager.getLogger("loop");
-
     void LoopManager::init() {
         state = GAME_STATE_LOOP;
         pinput->registerInput(this);
@@ -23,7 +21,7 @@ namespace loop {
 
     void LoopManager::quit() {
         state = GAME_STATE_QUIT;
-        LOG4CPLUS_INFO(logger, "Setting loop state to quit");
+        //LOG4CPLUS_INFO(logger, "Setting loop state to quit");
     }
 
     bool LoopManager::isEventHandled(uint32_t eventtype) {

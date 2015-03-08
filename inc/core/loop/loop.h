@@ -9,8 +9,6 @@
 
 namespace loop {
 
-    extern log4cplus::Logger logger;
-
     typedef enum {
         GAME_STATE_INIT,
         GAME_STATE_LOOP,

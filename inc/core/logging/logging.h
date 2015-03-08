@@ -2,8 +2,6 @@
 
 #ifndef _CORE_LOGGING_H_
 #define _CORE_LOGGING_H_
-#include <log4cplus/logger.h>
-#include <log4cplus/loggingmacros.h>
 #include <string>
 #include <map>
 
@@ -15,9 +13,8 @@ namespace logging {
     class LoggerManager {
     public:
         LoggerManager();
-        static log4cplus::Logger getLogger(std::string loggername);
+        int getLogger(std::string loggername);
     private:
-        std::map<std::string, log4cplus::Logger> loggers;
     };
 
     extern LoggerManager Manager;

@@ -10,8 +10,6 @@
 
 namespace input {
 
-    extern log4cplus::Logger logger;
-
     class EventHandler {
     public:
         virtual bool isEventHandled(uint32_t eventtype) = 0;
