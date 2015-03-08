@@ -4,7 +4,6 @@ Import('env')
 
 localenv = env.Clone()
 
-localenv.Append(CPPPATH=['#lib/entityx'])
 localenv.Append(CPPPATH=['#lib/gtest/include'])
 localenv.Append(CPPPATH=['#lib/gmock/include'])
 localenv.Append(CPPPATH=['#src/include'])

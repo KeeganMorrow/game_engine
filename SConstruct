@@ -31,6 +31,7 @@ src_dir = variant_dir + '/src'
 #Set general purpose environment variables
 env.Append(CPPPATH=['#inc'])
 env.Append(CPPPATH=['#lib/easyloggingpp/src'])
+env.Append(CPPPATH=['#lib/entityx'])
 env.Append(CXXFLAGS='-std=c++11')
 env.Append(LIBPATH=['#'+lib_dir])
 
