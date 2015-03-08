@@ -2,6 +2,7 @@
 
 
 #include "core/loop/loop.h"
+#include "core/logging/logging.h"
 
 
 namespace loop {
@@ -21,7 +22,7 @@ namespace loop {
 
     void LoopManager::quit() {
         state = GAME_STATE_QUIT;
-        //LOG4CPLUS_INFO(logger, "Setting loop state to quit");
+        CLOG(ERROR, "core.loop") << "Setting loop state to quit";
     }
 
     bool LoopManager::isEventHandled(uint32_t eventtype) {

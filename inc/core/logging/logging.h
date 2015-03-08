@@ -3,17 +3,28 @@
 #ifndef _CORE_LOGGING_H_
 #define _CORE_LOGGING_H_
 #include <string>
-#include <map>
+#include <easylogging++.h>
 
 namespace logging {
 
-    const std::string logconfig_path = "loggers.conf";
-
-    // TODO(KM, "Rethink the design of this class")
     class LoggerManager {
     public:
-        LoggerManager();
-        int getLogger(std::string loggername);
+        LoggerManager(){
+        }
+        //TODO: Should I be tracking and unregistering loggers?
+        ~LoggerManager(){}
+        void Init(int argv, char* argc[]){
+            START_EASYLOGGINGPP(argv, argc);
+        }
+
+        bool loadConfig(std::string configpath){
+            el::Configurations conf(configpath);
+            el::Loggers::reconfigureAllLoggers(conf);
+        }
+
+        void registerLogger(std::string loggername){
+            el::Loggers::getLogger(loggername,true);
+        }
     private:
     };
 

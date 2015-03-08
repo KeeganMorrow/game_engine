@@ -12,7 +12,6 @@ for subdir in ['core', 'samples']:
     engineobjects.append(o)
 
 engineLibs = [
-    'log4cplus',
     'SDL2',
     'SDL2_image',
     'entityx']

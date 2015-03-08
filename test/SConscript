@@ -11,6 +11,8 @@ localenv.Append(CPPPATH=['#src/include'])
 
 testlibs=['gmock', 'pthread', 'SDL2', 'SDL2_image', 'entityx']
 
+logsrc = '../src/core/logging/logging.cpp'
+
 # Run the child files!
 tests = []
 alltestmodules = []
@@ -37,8 +39,9 @@ for test in tests:
 
     # We will need to build these multiple times, so create objects for them
     testprogram = localenv.Object('testexec_'+basename, 'runtests.cpp')
+    logmodule = localenv.Object('testlog_' + basename, logsrc)
     module = localenv.Object('test_' + basename, srcpath)
-    tester = localenv.Program(testname, [testpath, module, testprogram], LIBS=testlibs)
+    tester = localenv.Program(testname, [testpath, module, testprogram, logmodule], LIBS=testlibs)
 
     allmodule = localenv.Object('alltest_' + basename, srcpath)
     alltestmodules.append(allmodule)
@@ -47,6 +50,7 @@ for test in tests:
 
 alltestmodules.append('runtests.cpp')
 
+alltestmodules.append(localenv.Object('testlog_alltests', logsrc))
 
 mastertest = localenv.Program("alltests", alltestmodules, LIBS=testlibs);
 

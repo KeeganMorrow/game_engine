@@ -6,8 +6,6 @@
 #include <SDL2/SDL.h>
 #include <vector>
 
-#include "core/logging/logging.h"
-
 namespace input {
 
     class EventHandler {

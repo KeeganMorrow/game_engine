@@ -4,7 +4,6 @@
 #define _CORE_LOOP_H
 
 #include "core/input/input.h"
-#include "core/logging/logging.h"
 #include "core/render/render.h"
 
 namespace loop {

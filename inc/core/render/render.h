@@ -3,8 +3,6 @@
 #ifndef _CORE_RENDER_H_
 #define _CORE_RENDER_H_
 
-#include "core/logging/logging.h"
-
 namespace render {
 
     class Renderer;

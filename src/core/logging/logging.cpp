@@ -4,14 +4,10 @@
 #include <iomanip>
 #include "core/logging/logging.h"
 
+INITIALIZE_EASYLOGGINGPP
+
 namespace logging {
 
     LoggerManager Manager;
 
-    LoggerManager::LoggerManager() {
-    }
-
-    int LoggerManager::getLogger(std::string loggername) {
-        return 5;
-    }
 };

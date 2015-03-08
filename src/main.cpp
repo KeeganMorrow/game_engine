@@ -14,6 +14,10 @@
 int main(int argc, char* argv[]) {
     logging::LoggerManager *pLogManager = new logging::LoggerManager();
 
+    pLogManager->Init(argc,argv);
+
+    LOG(INFO) << "Yay, log info!";
+
     render::RenderInit(640, 480);
 
     management::ContentManager *pContent = new management::ContentManager();
@@ -25,7 +29,7 @@ int main(int argc, char* argv[]) {
        "resources/testimage.png");
 
     if (pTexture == nullptr) {
-        // LOG4CPLUS_WARN(logger, "Failed loading texture");
+        //LOG(WARN) << "Failed loading texture";
     } else {
         render::pRenderer->renderTexture(pTexture, 100, 100, 100, 100);
     }

@@ -8,7 +8,6 @@
 #include <unordered_map>
 #include <utility>
 #include <string>
-#include "core/logging/logging.h"
 
 namespace management {
 

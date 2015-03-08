@@ -4,6 +4,7 @@
 #include <utility>
 #include "core/management/contentmanager.h"
 #include "core/render/render.h"
+#include "core/logging/logging.h"
 
 namespace management {
 
@@ -27,8 +28,8 @@ namespace management {
         SDL_Renderer *pRenderer = render::pRenderer->getRenderer();
         SDL_Texture *ptex = IMG_LoadTexture(pRenderer, path.c_str());
         if (ptex == nullptr) {
-        /*LOG4CPLUS_WARN(logger, "Failed loading texture " << path <<
-            " due to SDL error:" << IMG_GetError());*/
+        CLOG(ERROR, "render.contentmanager") << "Failed loading texture " << path <<
+            " due to SDL error:" << IMG_GetError();
             return false;
         }
         addTexture(path, ptex);
