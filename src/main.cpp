@@ -5,13 +5,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
-#include "core/app.hpp"
 
 int main(int argc, char* argv[]) {
-
-    core::App mainApplication;
-
-    mainApplication.init(argc, argv);
 
     return 0;
 }

@@ -1,6 +1,0 @@
-# Import the environment configured in SConstruct
-Import('env')
-
-# Return a list of the source files to be used in this directory
-objects = env.Object(['input.cpp'])
-Return('objects')
