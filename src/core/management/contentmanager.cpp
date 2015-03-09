@@ -25,8 +25,9 @@ namespace management {
     }
 
     bool ContentManager::addTexture(std::string path) {
-        SDL_Renderer *pRenderer = render::pRenderer->getRenderer();
-        SDL_Texture *ptex = IMG_LoadTexture(pRenderer, path.c_str());
+        //SDL_Renderer *pRenderer = render::pRenderer->getRenderer();
+        //SDL_Texture *ptex = IMG_LoadTexture(pRenderer, path.c_str());
+        SDL_Texture *ptex = nullptr;
         if (ptex == nullptr) {
         CLOG(ERROR, "render.contentmanager") << "Failed loading texture " << path <<
             " due to SDL error:" << IMG_GetError();
