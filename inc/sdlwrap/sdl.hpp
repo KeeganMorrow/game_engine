@@ -6,8 +6,8 @@
 namespace sdlwrap{
     class Sdl{
     public:
-        Sdl(){
-            SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER);
+        Sdl(Uint32 flags){
+            SDL_Init(flags);
         }
         ~Sdl(){
             SDL_Quit();
