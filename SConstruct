@@ -5,6 +5,12 @@ AddOption(
     help='Perform a release build',
     default=False)
 
+AddOption(
+    '--no-gui',
+    action='store_true',
+    help='Disable the GUI - useful for continuous integration',
+    default=False)
+
 # Initialize the environment
 env = Environment()
 
@@ -12,6 +18,9 @@ env = Environment()
 #env.Append(CCFLAGS='-m32')
 #env.Append(CPPFLAGS='-m32')
 #env.Append(LINKFLAGS='-m32')
+
+if GetOption('no_gui'):
+    env.Append(CPPDEFINES=['NO_GUI'])
 
 if GetOption('release'):
     # Use the release build directory
