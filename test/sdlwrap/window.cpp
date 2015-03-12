@@ -7,12 +7,12 @@
 using namespace sdlwrap;
 
 TEST(sdlwrapWindow, Constructor){
-    Window w("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_HIDDEN);
+    Window w("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
     int x, y;
     w.GetSize(&x,&y);
     EXPECT_EQ(x, 640);
     EXPECT_EQ(y, 480);
     Uint32 flags = w.GetFlags();
-    EXPECT_EQ(flags, SDL_WINDOW_HIDDEN);
+    EXPECT_EQ(flags, 0);
 }
 
