@@ -16,6 +16,7 @@ TEST(sdlwrapWindow, Constructor){
     EXPECT_EQ(640, x);
     EXPECT_EQ(480, y);
     Uint32 flags = w.GetFlags();
+    SDL_Quit();
 }
 
 #endif //NO_GUI
