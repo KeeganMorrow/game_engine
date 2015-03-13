@@ -1,4 +1,17 @@
 import os
+
+def TestWrapperScript(tests):
+    try:
+        testscript = open("runTests.sh", "w")
+        testscript.write("#!/usr/bin/env sh\ncd $(dirname $0)\n")
+        for test in tests:
+            testscript.write("./%s\n" % (test))
+    except IOError:
+        print "Error: Failed writing runTests.sh"
+    finally:
+        testscript.close()
+    os.chmod("runTests.sh", 0744)
+
 # Import the environment configured in SConstruct
 Import('env')
 
@@ -10,10 +23,12 @@ localenv.Append(CPPPATH=['#src/include'])
 
 testlibs=['gmock', 'pthread', 'SDL2', 'SDL2_image', 'entityx']
 
-logsrc = '../src/core/logging/logging.cpp'
+logmod = localenv.Object('logging', ['../src/core/logging/logging.cpp'])
+
+runtestmod = localenv.Object('runtests',['runtests.cpp'])
 
 # Run the child files!
-tests = []
+testsrcs = []
 alltestmodules = []
 for root, dirs, files in os.walk(Dir('.').srcnode().abspath):
     for file in files:
@@ -21,35 +36,24 @@ for root, dirs, files in os.walk(Dir('.').srcnode().abspath):
              if file !=  "runtests.cpp":
                  path=str(os.path.relpath(os.path.join(root,file),Dir('.').srcnode().abspath))
                  print "found test_target in location \"%s\"" % path
-                 tests.append(path)
+                 testsrcs.append(path)
 
 alltestmodules = []
 # Build individual test programs and get ready to build all tests
 # TODO: ALlow selection of tests (ie test/core/management)
-for test in tests:
+
+
+tests=[]
+for test in testsrcs:
     testpath = str(test)
     print testpath
     no_ext = os.path.splitext(testpath)[0]
     dirname,basename = os.path.split(no_ext)
     testname = no_ext.replace('/', '_') + '_test'
-
     srcpath = '../src/' + no_ext + '.cpp'
-    print "no_ext is \"%s\" basename is \"%s\" dirname is \"%s\" testname is \"%s\" srcpath is \"%s\"" % (no_ext, basename, dirname, testname, srcpath)
 
-    # We will need to build these multiple times, so create objects for them
-    testprogram = localenv.Object('testexec_'+basename, 'runtests.cpp')
-    logmodule = localenv.Object('testlog_' + basename, logsrc)
-    module = localenv.Object('test_' + basename, srcpath)
-    tester = localenv.Program(testname, [testpath, module, testprogram, logmodule], LIBS=testlibs)
+    testprog = localenv.Program(target=testname, source=[testpath, srcpath, runtestmod, logmod], LIBS=testlibs)
 
-    allmodule = localenv.Object('alltest_' + basename, srcpath)
-    alltestmodules.append(allmodule)
-    alltest = localenv.Object('all_' + basename, testpath)
-    alltestmodules.append(alltest)
+    tests.append(testname)
 
-alltestmodules.append('runtests.cpp')
-
-alltestmodules.append(localenv.Object('testlog_alltests', logsrc))
-
-mastertest = localenv.Program("alltests", alltestmodules, LIBS=testlibs);
-
+TestWrapperScript(tests)
