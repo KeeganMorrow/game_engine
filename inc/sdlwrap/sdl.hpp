@@ -6,11 +6,18 @@
 namespace sdlwrap{
     class Sdl{
     public:
-        Sdl(Uint32 flags){
-            SDL_Init(flags);
+        Sdl(Uint32 flags=0){
+            Init(flags);
         }
+
         ~Sdl(){
             SDL_Quit();
+        }
+
+        void Init(Uint32 flags = 0){
+            if (flags != 0) {
+                SDL_Init(flags);
+            }
         }
     private:
     };

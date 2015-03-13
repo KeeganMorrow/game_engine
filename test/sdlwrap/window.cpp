@@ -9,6 +9,7 @@ using namespace sdlwrap;
 #ifndef NO_GUI
 
 TEST(sdlwrapWindow, Constructor){
+    SDL_Init(SDL_INIT_EVERYTHING);
     Window w("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
     int x, y;
     w.GetSize(&x,&y);
