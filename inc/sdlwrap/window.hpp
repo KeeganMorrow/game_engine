@@ -7,7 +7,10 @@
 
 namespace sdlwrap{
 
+    class Render;
+
     class Window{
+        friend class Render;
     public:
         Window(std::string title, int x, int y, int w, int h, Uint32 flags):pwindow(nullptr){
             pwindow = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
@@ -22,6 +25,11 @@ namespace sdlwrap{
         Uint32 GetFlags(){
             return SDL_GetWindowFlags(pwindow);
         }
+    protected:
+        SDL_Window *getWindow(){
+            return pwindow;
+        };
+
     private:
         SDL_Window *pwindow;
     };
