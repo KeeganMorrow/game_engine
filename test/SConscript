@@ -3,9 +3,9 @@ import os
 def TestWrapperScript(tests):
     try:
         testscript = open("runTests.sh", "w")
-        testscript.write("#!/usr/bin/env sh\ncd $(dirname $0)\n")
+        testscript.write("#!/usr/bin/env sh\nDIR=$(dirname $0)\n")
         for test in tests:
-            testscript.write("./%s\n" % (test))
+            testscript.write("${DIR}/%s\n" % (test))
     except IOError:
         print "Error: Failed writing runTests.sh"
     finally:
