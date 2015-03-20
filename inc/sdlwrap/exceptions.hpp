@@ -7,6 +7,11 @@ namespace sdlwrap{
     public:
         exMissingFile(std::string path) : std::runtime_error("failure to locate file" + path ) {}
     };
+
+    class exInitFailure : public std::runtime_error {
+    public:
+        exInitFailure() : std::runtime_error("failure to initialize") {}
+    };
 };
 
 

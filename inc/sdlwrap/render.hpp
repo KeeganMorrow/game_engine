@@ -2,7 +2,9 @@
 #define RENDER_HPP
 
 #include <assert.h>
+
 #include "sdlwrap/window.hpp"
+#include "sdlwrap/exceptions.hpp"
 
 namespace sdlwrap {
 
@@ -10,7 +12,9 @@ class Render{
     public:
         Render(Window *pwindow, int index, Uint32 flags):prenderer(nullptr){
             prenderer = SDL_CreateRenderer(pwindow->getWindow(), index, flags);
-            //TODO: Validate prenderer and throw exception if nullptr
+            if (prenderer == nullptr){
+                throw exInitFailure();
+            }
         }
         ~Render(){
             assert(prenderer != nullptr);
