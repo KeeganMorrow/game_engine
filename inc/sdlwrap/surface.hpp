@@ -2,6 +2,8 @@
 #define SURFACE_HPP
 
 #include <string>
+#include <assert.h>
+#include <exception>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "sdlwrap/exceptions.hpp"
