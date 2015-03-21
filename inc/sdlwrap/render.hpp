@@ -13,7 +13,7 @@ class Render{
         Render(Window *pwindow, int index, Uint32 flags):prenderer(nullptr){
             prenderer = SDL_CreateRenderer(pwindow->getWindow(), index, flags);
             if (prenderer == nullptr){
-                throw exInitFailure();
+                throw exInitFailure(std::string(SDL_GetError()));
             }
         }
         ~Render(){

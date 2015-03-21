@@ -1,3 +1,4 @@
+#include <iostream>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <SDL2/SDL.h>
@@ -20,6 +21,7 @@ TEST(sdlwrapRender, constructor) {
     }
     catch (exInitFailure &e)
     {
+        std::cout << "Exception occurred: " << e.what() << std::endl;
         didthrow = true;
     }
     EXPECT_TRUE(didthrow);

@@ -10,7 +10,7 @@ namespace sdlwrap{
 
     class exInitFailure : public std::runtime_error {
     public:
-        exInitFailure() : std::runtime_error("failure to initialize") {}
+        exInitFailure(std::string errormsg=std::string()) : std::runtime_error("failure to initialize. Error: " + errormsg ) {}
     };
 };
 
