@@ -10,6 +10,7 @@ using namespace sdlwrap;
 TEST(sdlwrapWindow, Constructor){
     SDL_Init(SDL_INIT_EVERYTHING);
     Window w("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+    // TODO: Validate that exception is thrown correctly in constructor
     int x, y;
     w.GetSize(&x,&y);
     EXPECT_EQ(640, x);

@@ -5,6 +5,8 @@
 #include <string>
 #include <SDL2/SDL.h>
 
+#include "sdlwrap/exceptions.hpp"
+
 namespace sdlwrap{
 
     class Render;
@@ -12,8 +14,13 @@ namespace sdlwrap{
     class Window{
         friend class Render;
     public:
-        Window(std::string title, int x, int y, int w, int h, Uint32 flags):pwindow(nullptr){
+        Window(std::string title, int x, int y, int w, int h, Uint32 flags):
+            pwindow(nullptr)
+        {
             pwindow = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
+            if (pwindow == nullptr){
+                throw exInitFailure(std::string(SDL_GetError()));
+            }
         }
         ~Window(){
             assert(pwindow != nullptr);
