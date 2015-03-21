@@ -21,7 +21,6 @@ TEST(sdlwrapRender, constructor) {
     }
     catch (exInitFailure &e)
     {
-        std::cout << "Exception occurred: " << e.what() << std::endl;
         didthrow = true;
     }
     EXPECT_TRUE(didthrow);
@@ -37,6 +36,7 @@ TEST(sdlwrapRender, constructor) {
     catch (exInitFailure &e)
     {
         didthrow = true;
+        std::cout << "Unexpected exception occurred: " << e.what() << std::endl;
     }
     EXPECT_FALSE(didthrow);
 
