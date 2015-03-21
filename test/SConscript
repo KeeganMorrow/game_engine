@@ -3,12 +3,14 @@ import os
 def TestWrapperScript(tests):
     try:
         testscript = open("runTests.sh", "w")
-        testscript.write("#!/usr/bin/env sh\nDIR=$(dirname $0)\n")
+        testscript.write("#!/usr/bin/env sh\nDIR=$(dirname $0)\nRET=0\n")
         for test in tests:
             testscript.write("${DIR}/%s\n" % (test))
+            testscript.write("EXIT=$?\nif [ $EXIT -ne 0 ]; then\n    RET=$EXIT\nfi\n")
     except IOError:
         print "Error: Failed writing runTests.sh"
     finally:
+        testscript.write("exit $RET\n")
         testscript.close()
     os.chmod("runTests.sh", 0744)
 
