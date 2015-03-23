@@ -15,6 +15,12 @@ TEST(sdlwrapRender, constructor) {
     bool didthrow = false;
     Render *pr = nullptr;
 
+    for (int i = 0; i < SDL_GetNumRenderDrivers(); i++){
+        SDL_RendererInfo info;
+        SDL_GetRenderDriverInfo(i, &info);
+        std::cout << "Found driver \"" << info.name << "\"" << std::endl;
+    }
+
     // Verify exceptions work by passing invalid combination of flags
     try{
         pr = new Render(&w, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_SOFTWARE );
