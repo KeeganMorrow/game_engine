@@ -37,7 +37,7 @@ TEST(sdlwrapRender, constructor) {
 
     didthrow = false;
     try{
-        pr = new Render(&w, -1, 0 );
+        pr = new Render(&w, -1, SDL_RENDERER_SOFTWARE );
     }
     catch (exInitFailure &e)
     {
