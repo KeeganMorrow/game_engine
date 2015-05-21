@@ -17,5 +17,5 @@ compiler:
   - gcc
 
 script:
-    - scons lib --no-graphics; scons test; scons engine; xvfb-run ./build/debug/test/runTests.sh
+    - scons lib; scons test --no-graphics; scons engine; xvfb-run ./build/debug/test/runTests.sh
 
