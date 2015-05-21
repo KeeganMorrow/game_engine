@@ -16,9 +16,10 @@ TEST(sdlwrapRender, constructor) {
     bool didthrow = false;
     Render *pr = nullptr;
 
-    // Verify exceptions work by passing invalid combination of flags
+    // Verify exceptions if window not provided
+    // Still need to test sdl renderer creation failure
     try{
-        pr = new Render(&w, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_SOFTWARE );
+        pr = new Render(nullptr, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_SOFTWARE );
     }
     catch (exInitFailure &e)
     {

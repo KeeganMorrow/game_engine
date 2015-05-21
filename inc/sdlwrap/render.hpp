@@ -11,6 +11,9 @@ namespace sdlwrap {
 class Render{
     public:
         Render(Window *pwindow, int index, Uint32 flags):prenderer(nullptr){
+            if (pwindow == nullptr){
+                throw exInitFailure(std::string(SDL_GetError()));
+            }
             prenderer = SDL_CreateRenderer(pwindow->getWindow(), index, flags);
             if (prenderer == nullptr){
                 throw exInitFailure(std::string(SDL_GetError()));
