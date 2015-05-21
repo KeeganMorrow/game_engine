@@ -8,6 +8,7 @@
 
 using namespace sdlwrap;
 
+#ifndef NO_GRAPHICS
 TEST(sdlwrapRender, constructor) {
     SDL_Init(SDL_INIT_EVERYTHING);
     Window w("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
@@ -43,3 +44,4 @@ TEST(sdlwrapRender, constructor) {
     delete pr;
     SDL_Quit();
 }
+#endif //ndef NO_GRAPHICS

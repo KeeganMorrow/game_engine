@@ -6,7 +6,7 @@
 
 using namespace sdlwrap;
 
-#ifndef NO_GUI
+#ifndef NO_GRAPHICS
 TEST(sdlwrapWindow, Constructor){
     SDL_Init(SDL_INIT_EVERYTHING);
     Window w("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
@@ -19,4 +19,4 @@ TEST(sdlwrapWindow, Constructor){
     SDL_Quit();
 }
 
-#endif //NO_GUI
+#endif //ndef NO_GUI

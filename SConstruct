@@ -6,9 +6,9 @@ AddOption(
     default=False)
 
 AddOption(
-    '--no-gui',
+    '--no-graphics',
     action='store_true',
-    help='Disable the GUI - useful for continuous integration',
+    help='Disable the graphical tests - useful for continuous integration',
     default=False)
 
 # Initialize the environment
@@ -19,8 +19,8 @@ env = Environment()
 #env.Append(CPPFLAGS='-m32')
 #env.Append(LINKFLAGS='-m32')
 
-if GetOption('no_gui'):
-    env.Append(CPPDEFINES=['NO_GUI'])
+if GetOption('no_graphics'):
+    env.Append(CPPDEFINES=['NO_GRAPHICS'])
 
 if GetOption('release'):
     # Use the release build directory
