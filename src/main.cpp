@@ -10,6 +10,7 @@
 int main(int argc, char* argv[]) {
     core::Application *papp = new core::Application(argc, argv);
     papp->init();
+    papp->loop();
     delete papp;
     return 0;
 }
