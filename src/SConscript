@@ -11,8 +11,10 @@ for subdir in ['sdlwrap', 'core']:
     o = localenv.SConscript('%s/SConscript' % subdir, {'env': localenv})
     engineobjects.append(o)
 
+localenv.Append(LIBPATH='./sdlwrap')
 
 engineLibs = [
+    'sdlwrap',
     'SDL2',
     'SDL2_image',]
 

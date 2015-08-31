@@ -1,4 +1,6 @@
 #include "application.hpp"
+#include "sdlwrap/surface.hpp"
+#include <string>
 
 namespace core{
 
@@ -12,6 +14,12 @@ void Application::init(){
 }
 
 int Application::loop(){
+    int ret;
+
+    auto psurface = new sdlwrap::Surface();
+    psurface->init(std::string("resources/testimage.png"));
+    auto ptexture = new sdlwrap::Texture();
+    ptexture->init(prender, psurface);
     while(toquit != true){
         SDL_Event event;
         while (SDL_PollEvent(&event)){
@@ -23,6 +31,21 @@ int Application::loop(){
                 //Unhandled event
                 break;
             }
+        }
+        ret = prender->RenderClear();
+        if (ret){
+            printf("Error clearing renderer\n");
+            return ret;
+        }
+        ret = prender->RenderCopy(ptexture, nullptr, nullptr);
+        if (ret){
+            printf("Error clearing renderer\n");
+            return ret;
+        }
+        ret = prender->RenderPresent();
+        if (ret){
+            printf("Error presenting renderer\n");
+            return ret;
         }
     }
 }

@@ -8,6 +8,8 @@
 
 namespace sdlwrap {
 
+class Texture;
+
 class Render{
     public:
         Render(Window *pwindow, int index, Uint32 flags):prenderer(nullptr){
@@ -23,6 +25,14 @@ class Render{
             assert(prenderer != nullptr);
             SDL_DestroyRenderer(prenderer);
         }
+        int RenderClear();
+        int RenderPresent();
+
+        SDL_Renderer *get_renderer(void){
+            return prenderer;
+        }
+
+        int RenderCopy(Texture *ptexture, const SDL_Rect *srcrect, const SDL_Rect *dstrect);
     private:
         SDL_Renderer *prenderer;
 };
