@@ -16,30 +16,9 @@ class Application{
             delete pwindow;
         }
 
-        void init(){
-            // TODO(KM, "Remove magic numbers")
-            pwindow = new sdlwrap::Window("Engine", 0, 0, 640, 480, 0);
-            prender = new sdlwrap::Render(pwindow, -1,
-                    SDL_RENDERER_ACCELERATED);
+        void init();
 
-            toquit = false;
-        }
-
-        int loop(){
-            while(toquit != true){
-                SDL_Event event;
-                while (SDL_PollEvent(&event)){
-                    switch(event.type){
-                    case SDL_QUIT:
-                        toquit=true;
-                        break;
-                    default:
-                        //Unhandled event
-                        break;
-                    }
-                }
-            }
-        }
+        int loop();
 
     private:
         sdlwrap::Render *prender;

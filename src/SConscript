@@ -7,7 +7,7 @@ localenv = env.Clone()
 engineobjects = ['main.cpp']
 
 # Read child SConscript files and get their object files
-for subdir in ['sdlwrap']:
+for subdir in ['sdlwrap', 'core']:
     o = localenv.SConscript('%s/SConscript' % subdir, {'env': localenv})
     engineobjects.append(o)
 
