@@ -1,10 +1,11 @@
 import os
 
-def TestWrapperScript(tests):
+def test_wrapper_script(target, source, env):
+    filepath = Dir('.').abspath + "/runTests.sh"
     try:
-        testscript = open("runTests.sh", "w")
+        testscript = open(filepath, "w")
         testscript.write("#!/usr/bin/env sh\nDIR=$(dirname $0)\nRET=0\n")
-        for test in tests:
+        for test in source:
             testscript.write("${DIR}/%s\n" % (test))
             testscript.write("EXIT=$?\nif [ $EXIT -ne 0 ]; then\n    RET=$EXIT\nfi\n")
     except IOError:
@@ -13,6 +14,9 @@ def TestWrapperScript(tests):
         testscript.write("exit $RET\n")
         testscript.close()
     os.chmod("runTests.sh", 0744)
+    return None
+
+
 
 # Import the environment configured in SConstruct
 Import('env')
@@ -24,8 +28,10 @@ localenv.Append(CPPPATH=['#lib/gmock/include'])
 #Hack - Make this more intelligent and selective later
 localenv.Append(CPPPATH=['#src/inc'])
 localenv.Append(CPPPATH=['#include/sdlwrap'])
+test_wrapper_script_builder = Builder(action=test_wrapper_script, suffix='.sh')
+localenv.Append(BUILDERS={'TestWrapperScript': test_wrapper_script_builder})
 
-testlibs=['gmock', 'pthread', 'SDL2', 'SDL2_image', 'entityx']
+testlibs=['gmock', 'pthread', 'SDL2', 'SDL2_image']
 
 logmod = localenv.Object('logging', ['../src/core/logging/logging.cpp'])
 
@@ -62,4 +68,4 @@ for test in testsrcs:
 
     tests.append(testname)
 
-TestWrapperScript(tests)
+localenv.TestWrapperScript(tests)

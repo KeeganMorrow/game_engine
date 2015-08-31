@@ -1,3 +1,6 @@
 # Unwanted SCons Files
 .sconsign.dblite
 
+# Generated test runner script
+runTests.sh
+
