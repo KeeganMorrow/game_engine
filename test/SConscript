@@ -21,7 +21,9 @@ localenv = env.Clone()
 
 localenv.Append(CPPPATH=['#lib/gtest/include'])
 localenv.Append(CPPPATH=['#lib/gmock/include'])
-localenv.Append(CPPPATH=['#src/include'])
+#Hack - Make this more intelligent and selective later
+localenv.Append(CPPPATH=['#src/inc'])
+localenv.Append(CPPPATH=['#include/sdlwrap'])
 
 testlibs=['gmock', 'pthread', 'SDL2', 'SDL2_image', 'entityx']
 
@@ -52,9 +54,11 @@ for test in testsrcs:
     no_ext = os.path.splitext(testpath)[0]
     dirname,basename = os.path.split(no_ext)
     testname = no_ext.replace('/', '_') + '_test'
+    print testname
     srcpath = '../src/' + no_ext + '.cpp'
 
-    testprog = localenv.Program(target=testname, source=[testpath, srcpath, runtestmod, logmod], LIBS=testlibs)
+    srcmod = localenv.Object(no_ext.replace('/', '_') + '_tested',[srcpath])
+    testprog = localenv.Program(target=testname, source=[testpath, srcmod, runtestmod, logmod], LIBS=testlibs)
 
     tests.append(testname)
 
