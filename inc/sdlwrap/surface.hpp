@@ -11,6 +11,36 @@
 namespace sdlwrap{
     class Render;
 
+    class Rectangle{
+        public:
+            Rectangle(int x, int y, int w, int h);
+            void get(int *x, int *y, int *w, int *h);
+            const SDL_Rect *get_raw() const;
+
+            void set_x(int x){
+                prect->x = x;
+            }
+
+            void set_y(int y){
+                prect->y = y;
+            }
+
+            void set_w(int w){
+                prect->w = w;
+            }
+
+            void set_h(int h){
+                prect->h = h;
+            }
+
+            ~Rectangle(){
+                delete prect;
+            }
+
+        private:
+            SDL_Rect *prect;
+    };
+
     class Surface{
     public:
         Surface():psurface(nullptr){}

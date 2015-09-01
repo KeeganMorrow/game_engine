@@ -7,7 +7,7 @@
 #include "sdlwrap/exceptions.hpp"
 
 namespace sdlwrap {
-
+class Rectangle;
 class Texture;
 
 class Render{
@@ -32,7 +32,7 @@ class Render{
             return prenderer;
         }
 
-        int RenderCopy(Texture *ptexture, const SDL_Rect *srcrect, const SDL_Rect *dstrect);
+        int RenderCopy(Texture *ptexture, const Rectangle *srcrect, const Rectangle *dstrect);
     private:
         SDL_Renderer *prenderer;
 };

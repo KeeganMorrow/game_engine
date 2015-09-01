@@ -3,6 +3,27 @@
 
 namespace sdlwrap{
 
+    Rectangle::Rectangle(int x, int y, int w, int h){
+        prect = new SDL_Rect{x, y, w, h};
+    }
+    void Rectangle::get(int *x, int *y, int *w, int *h){
+        if (x){
+            *x = prect->x;
+        }
+        if (y){
+            *y = prect->y;
+        }
+        if (w){
+            *w = prect->w;
+        }
+        if (h){
+            *h = prect->h;
+        }
+    }
+    const SDL_Rect *Rectangle::get_raw() const{
+        return prect;
+    }
+
     int Surface::init(std::string filepath){
         psurface = IMG_Load(filepath.c_str());
         if (psurface == nullptr){

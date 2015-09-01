@@ -37,7 +37,8 @@ int Application::loop(){
             printf("Error clearing renderer\n");
             return ret;
         }
-        ret = prender->RenderCopy(ptexture, nullptr, nullptr);
+        auto pdst = new sdlwrap::Rectangle(25, 25, 150, 80);
+        ret = prender->RenderCopy(ptexture, nullptr, pdst);
         if (ret){
             printf("Error clearing renderer\n");
             return ret;

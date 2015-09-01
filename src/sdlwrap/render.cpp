@@ -12,12 +12,21 @@ int Render::RenderPresent(){
 }
 
 int Render::RenderCopy(Texture *ptexture,
-        const SDL_Rect *srcrect,
-        const SDL_Rect *dstrect){
+        const Rectangle *srcrect,
+        const Rectangle *dstrect){
+    const SDL_Rect *pdst = nullptr;
+    const SDL_Rect *psrc = nullptr;
+    if (srcrect){
+        psrc = srcrect->get_raw();
+    }
+    if (dstrect){
+        pdst = dstrect->get_raw();
+    }
+
     SDL_RenderCopy(prenderer,
                    ptexture->get_texture(),
-                   srcrect,
-                   dstrect);
+                   psrc,
+                   pdst);
 }
 
 };
