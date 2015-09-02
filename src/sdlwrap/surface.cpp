@@ -1,5 +1,5 @@
-#include "sdlwrap/surface.hpp"
-#include "sdlwrap/render.hpp"
+#include "surface.hpp"
+#include "render.hpp"
 
 namespace sdlwrap{
 

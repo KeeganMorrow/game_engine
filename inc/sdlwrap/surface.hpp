@@ -6,7 +6,7 @@
 #include <exception>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "sdlwrap/exceptions.hpp"
+#include "exceptions.hpp"
 
 namespace sdlwrap{
     class Render;

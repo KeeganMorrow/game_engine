@@ -5,7 +5,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 
-#include "sdlwrap/exceptions.hpp"
+#include "exceptions.hpp"
 
 namespace sdlwrap{
 

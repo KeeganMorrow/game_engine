@@ -3,8 +3,8 @@
 
 #include <assert.h>
 
-#include "sdlwrap/window.hpp"
-#include "sdlwrap/exceptions.hpp"
+#include "window.hpp"
+#include "exceptions.hpp"
 
 namespace sdlwrap {
 class Rectangle;
