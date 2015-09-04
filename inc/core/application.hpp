@@ -3,6 +3,7 @@
 
 #include "sdlwrap/window.hpp"
 #include "sdlwrap/render.hpp"
+#include "core/world.hpp"
 
 namespace core{
 class Application{
@@ -14,6 +15,7 @@ class Application{
         ~Application(){
             delete prender;
             delete pwindow;
+            delete pworld;
         }
 
         void init();
@@ -21,8 +23,10 @@ class Application{
         int loop();
 
     private:
+        int loop_start_time;
         sdlwrap::Render *prender;
         sdlwrap::Window *pwindow;
+        core::World *pworld;
 
         bool toquit;
 };

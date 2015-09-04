@@ -9,12 +9,17 @@ void Application::init(){
     pwindow = new sdlwrap::Window("Engine", 0, 0, 640, 480, 0);
     prender = new sdlwrap::Render(pwindow, -1,
             SDL_RENDERER_ACCELERATED);
-
+    pworld = new core::World();
     toquit = false;
 }
 
 int Application::loop(){
+    int old_time;
     int ret;
+    float dt;
+    old_time = loop_start_time;
+    loop_start_time = SDL_GetTicks();
+    dt = (loop_start_time - old_time) / 1000.0f;
 
     auto psurface = new sdlwrap::Surface();
     psurface->init(std::string("resources/testimage.png"));
@@ -32,6 +37,12 @@ int Application::loop(){
                 break;
             }
         }
+
+
+        if (pworld){
+            pworld->update(dt);
+        }
+
         ret = prender->RenderClear();
         if (ret){
             printf("Error clearing renderer\n");
