@@ -1,4 +1,5 @@
 ! .gitignore
+! resources
 # Just ignore everything in the build directory!
 *
 
