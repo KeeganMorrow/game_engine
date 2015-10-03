@@ -10,6 +10,9 @@ before_install:
 install:
   - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev liblog4cplus-dev gcc-4.8 g++-4.8
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+  - wget http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-i386.tar.gz
+      && tar -xzf cmake-3.3.2-Linux-i386.tar.gz
+      && sudo cp -fR cmake-3.3.2-Linux-i386/* /usr
 
 language: cpp
 
