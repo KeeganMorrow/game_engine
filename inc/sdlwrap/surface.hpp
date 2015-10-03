@@ -49,7 +49,7 @@ namespace sdlwrap{
             assert(psurface != nullptr);
             delete psurface;
         }
-        int init(std::string filepath);
+        void init(std::string filepath);
 
         SDL_Surface *get_surface(){
             return psurface;
@@ -67,10 +67,10 @@ namespace sdlwrap{
             return ptexture;
         }
     private:
-        SDL_Texture *ptexture;
         Render *prenderer;
+        SDL_Texture *ptexture;
 
     };
-};
+}
 
 #endif /* SURFACE_HPP */

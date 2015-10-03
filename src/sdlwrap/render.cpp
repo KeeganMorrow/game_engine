@@ -4,10 +4,10 @@
 namespace sdlwrap{
 
 int Render::RenderClear(){
-    SDL_RenderClear(prenderer);
+    return SDL_RenderClear(prenderer);
 }
 
-int Render::RenderPresent(){
+void Render::RenderPresent(){
     SDL_RenderPresent(prenderer);
 }
 
@@ -23,10 +23,10 @@ int Render::RenderCopy(Texture *ptexture,
         pdst = dstrect->get_raw();
     }
 
-    SDL_RenderCopy(prenderer,
+    return SDL_RenderCopy(prenderer,
                    ptexture->get_texture(),
                    psrc,
                    pdst);
 }
 
-};
+}

@@ -40,5 +40,5 @@ namespace sdlwrap{
     private:
         SDL_Window *pwindow;
     };
-};
+}
 #endif /* SDLWRAP_WINDOW_HPP */

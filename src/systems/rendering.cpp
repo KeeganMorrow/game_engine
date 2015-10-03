@@ -57,4 +57,4 @@ sdlwrap::Texture *RenderSystem::load_texture(const std::string path){
     ptexture->init(prender, psurface);
     return ptexture;
 }
-};
+}

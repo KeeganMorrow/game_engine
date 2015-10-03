@@ -24,7 +24,7 @@ namespace sdlwrap{
         return prect;
     }
 
-    int Surface::init(std::string filepath){
+    void Surface::init(std::string filepath){
         psurface = IMG_Load(filepath.c_str());
         if (psurface == nullptr){
             throw exMissingFile(filepath);

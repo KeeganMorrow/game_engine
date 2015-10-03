@@ -26,7 +26,7 @@ class Render{
             SDL_DestroyRenderer(prenderer);
         }
         int RenderClear();
-        int RenderPresent();
+        void RenderPresent();
 
         SDL_Renderer *get_renderer(void){
             return prenderer;
@@ -37,6 +37,6 @@ class Render{
         SDL_Renderer *prenderer;
 };
 
-};
+}
 
 #endif /* RENDER_HPP */

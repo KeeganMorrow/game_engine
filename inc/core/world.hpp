@@ -43,6 +43,6 @@ public:
     }
 };
 
-};
+}
 
 #endif /* WORLD_HPP */

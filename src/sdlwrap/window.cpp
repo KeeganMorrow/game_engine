@@ -2,4 +2,4 @@
 #include "render.hpp"
 namespace sdlwrap{
 
-};
+}

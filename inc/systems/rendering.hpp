@@ -41,6 +41,6 @@ private:
     sdlwrap::Render *prender;
 };
 
-};
+}
 
 #endif /* RENDERING_HPP */

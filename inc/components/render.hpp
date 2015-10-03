@@ -20,5 +20,5 @@ private:
     sdlwrap::Texture *ptex;
 };
 
-};
+}
 #endif /* COMPONENTS_RENDER_HPP */

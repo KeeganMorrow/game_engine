@@ -13,7 +13,6 @@ void Application::init(){
 
 int Application::loop(){
     int old_time;
-    int ret;
     float dt;
     old_time = loop_start_time;
     loop_start_time = SDL_GetTicks();
@@ -36,5 +35,6 @@ int Application::loop(){
             pworld->update(dt);
         }
     }
+    return 0;
 }
 }

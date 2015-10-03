@@ -12,5 +12,5 @@ public:
     float pos_x, pos_y, size_x, size_y, rotation, vel_x, vel_y;
 };
 
-};
+}
 #endif /* COMPONENTS_BASIC_HPP */

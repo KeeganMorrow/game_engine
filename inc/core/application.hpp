@@ -27,6 +27,6 @@ class Application{
         bool toquit;
 };
 
-};
+}
 
 #endif /* APPLICATION_HPP */

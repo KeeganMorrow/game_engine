@@ -12,7 +12,7 @@ namespace sdlwrap{
     public:
         exInitFailure(std::string errormsg=std::string()) : std::runtime_error("failure to initialize. Error: " + errormsg ) {}
     };
-};
+}
 
 
 #endif /* EXCEPTIONS_HPP */
