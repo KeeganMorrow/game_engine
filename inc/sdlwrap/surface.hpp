@@ -46,8 +46,9 @@ namespace sdlwrap{
         Surface():psurface(nullptr){}
 
         ~Surface(){
-            assert(psurface != nullptr);
-            delete psurface;
+            if (psurface != nullptr){
+                delete psurface;
+            }
         }
         void init(std::string filepath);
 
