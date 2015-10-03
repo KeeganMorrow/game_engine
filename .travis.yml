@@ -1,5 +1,5 @@
 before_install:
-    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then source ./travis/before-install_linux.sh ; fi
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo ./travis/before-install_linux.sh ; fi
 
 install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo ./travis/install_linux.sh ; fi
