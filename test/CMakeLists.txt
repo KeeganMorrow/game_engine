@@ -7,7 +7,7 @@ target_link_libraries(test_sdlwrap gtest gtest_main)
 # cmake .. -Dsdlwrap_test_no_graphics
 target_link_libraries(test_sdlwrap sdlwrap)
 if (sdlwrap_test_no_graphics)
-    target_compile_definitions(test_sdlwrap PRIVATE SDLWRAP_TEST_NO_GRAPHICS=1)
+    target_compile_definitions(test_sdlwrap PRIVATE NO_GRAPHICS=1)
 endif()
 
 # This is disabled for now becuase sdlwrap tests when run by ctest (gui?)
