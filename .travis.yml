@@ -11,5 +11,5 @@ compiler:
   - gcc
 
 script:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then source ./travis/script_linux.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./travis/script_linux.sh ; fi
 
