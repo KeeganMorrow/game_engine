@@ -3,7 +3,12 @@ target_include_directories(test_sdlwrap PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../l
 target_include_directories(test_sdlwrap PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../lib/gmock/include")
 target_include_directories(test_sdlwrap PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../inc")
 target_link_libraries(test_sdlwrap gtest gtest_main)
+# To disable graphics when running sdlwrap unit tests do this:
+# cmake .. -Dsdlwrap_test_no_graphics
 target_link_libraries(test_sdlwrap sdlwrap)
+if (sdlwrap_test_no_graphics)
+    target_compile_definitions(test_sdlwrap PRIVATE SDLWRAP_TEST_NO_GRAPHICS=1)
+endif()
 
 # This is disabled for now becuase sdlwrap tests when run by ctest (gui?)
 #add_test(NAME sdlwrap COMMAND test_sdlwrap)
