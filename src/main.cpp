@@ -6,8 +6,9 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include "core/application.hpp"
-
+#include <iostream>
 int main(int argc, char* argv[]) {
+    std::cout << "initializing things\n";
     core::Application *papp = new core::Application(argc, argv);
     papp->init();
     papp->loop();

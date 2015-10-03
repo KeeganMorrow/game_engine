@@ -8,13 +8,11 @@
 namespace core{
 class Application{
     public:
-        Application(int argc, char *arv[]):prender(nullptr), pwindow(nullptr){
+        Application(int argc, char *arv[]){
             // TODO(KM, "Add some arument parsing type stuff here")
         }
 
         ~Application(){
-            delete prender;
-            delete pwindow;
             delete pworld;
         }
 
@@ -24,8 +22,6 @@ class Application{
 
     private:
         int loop_start_time;
-        sdlwrap::Render *prender;
-        sdlwrap::Window *pwindow;
         core::World *pworld;
 
         bool toquit;
