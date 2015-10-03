@@ -31,7 +31,7 @@ public:
         std::cout << "Initializing entity \n";
         auto ptex = prender->load_texture("resources/testimage.png");
         entityx::Entity entity = entities.create();
-        entity.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 0.4, 0.0);
+        entity.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 80, 0.0);
         entity.assign<components::RenderTexture>(ptex);
         std::cout << "Initialized entity \n";
         std::cout << "Initialized world\n";
@@ -39,7 +39,10 @@ public:
 
     void update(entityx::TimeDelta dt) {
         systems.update<systems::PositionPrinter>(dt);
+    }
+    void render(entityx::TimeDelta dt) {
         systems.update<systems::RenderSystem>(dt);
+
     }
 };
 
