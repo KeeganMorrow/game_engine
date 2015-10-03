@@ -17,5 +17,5 @@ compiler:
   - gcc
 
 script:
-    - scons lib; scons test --no-graphics; scons engine; xvfb-run ./runTests.sh
+    - cd build ; cmake .. ; make ; env CTEST_OUTPUT_ON_FAILURE=1 make test ; ./test/test_sdlwrap
 
