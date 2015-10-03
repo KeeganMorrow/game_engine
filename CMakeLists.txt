@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.3)
 
+enable_testing()
 project(game_engine CXX)
 
 include(${CMAKE_ROOT}/Modules/CheckIncludeFile.cmake)
