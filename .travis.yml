@@ -11,8 +11,9 @@ install:
   - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev liblog4cplus-dev gcc-4.8 g++-4.8
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
   - wget http://www.cmake.org/files/v3.3/cmake-3.3.0.tar.gz && tar -zxvf cmake-3.3.0.tar.gz
-  - cd cmake-3.3.0 && ./bootstrap && make
-  - sudo make install
+  - cd cmake-3.3.0 && ./bootstrap > /dev/null 2>&1 && make > /dev/null 2>&1
+  - sudo make install > /dev/null 2>&1
+  - cd ../ && rm -rf cmake-3.3.0
 
 language: cpp
 
