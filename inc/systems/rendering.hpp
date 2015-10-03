@@ -34,6 +34,7 @@ public:
 
     void draw_object(components::RenderTexture &texture, components::Spacial &spacial);
 
+    void draw_object_interpolated(components::RenderTexture &texture, components::Spacial &spacial, float dt);
     sdlwrap::Texture *load_texture(const std::string path);
 
 private:

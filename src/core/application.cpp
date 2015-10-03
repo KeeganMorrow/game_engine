@@ -28,9 +28,8 @@ int Application::loop(){
         }
 
         if (pworld){
-            uint32_t old_time = loop_start_time;
             loop_start_time = SDL_GetTicks();
-            float dt = (loop_start_time - old_time) / 1000.0;
+            float dt = (loop_start_time - last_update_time) / 1000.0;
             if ( loop_start_time >= last_update_time + 16 ){
                 float update_dt = (loop_start_time - last_update_time) / 1000.0f;
                 last_update_time = loop_start_time;
