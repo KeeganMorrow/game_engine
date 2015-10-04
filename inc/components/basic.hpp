@@ -8,9 +8,13 @@ public:
            ) :
         pos_x(pos_x), pos_y(pos_y), size_x(size_x), size_y(size_y),
         rotation(rotation), vel_x(vel_x), vel_y(vel_y){}
-
+    friend Spacial operator+(const Spacial &s1, const Spacial &s2);
+    friend Spacial operator-(const Spacial &s1, const Spacial &s2);
     float pos_x, pos_y, size_x, size_y, rotation, vel_x, vel_y;
 };
 
+    Spacial operator+(const Spacial &s1, const Spacial &s2);
+
+    Spacial operator-(const Spacial &s1, const Spacial &s2);
 }
 #endif /* COMPONENTS_BASIC_HPP */
