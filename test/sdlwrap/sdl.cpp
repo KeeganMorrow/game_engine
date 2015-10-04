@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#ifndef NO_GRAPHICS
 TEST(SDLmain,init){
     sdlwrap::Sdl *psdl = new sdlwrap::Sdl();
     EXPECT_FALSE(SDL_WasInit(SDL_INIT_EVERYTHING));
@@ -24,4 +25,4 @@ TEST(SDLmain,init){
     delete psdl;
     EXPECT_FALSE(SDL_WasInit(SDL_INIT_EVERYTHING));
 }
-
+#endif //ndef NO_GRAPHICS
