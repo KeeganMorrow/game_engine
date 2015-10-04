@@ -7,26 +7,14 @@ namespace core{
 
 void Application::init(){
     // TODO(KM, "Remove magic numbers")
-    pworld = new core::World();
+    pworld = new core::World(this);
     pworld->init();
     toquit = false;
 }
 
 int Application::loop(){
-    //TODO: Move event handling out of application
-    while(toquit != true){
-        SDL_Event event;
-        while (SDL_PollEvent(&event)){
-            switch(event.type){
-            case SDL_QUIT:
-                toquit=true;
-                break;
-            default:
-                //Unhandled event
-                break;
-            }
-        }
 
+    while(toquit != true){
         if (pworld){
             loop_start_time = SDL_GetTicks();
             float dt = (loop_start_time - last_update_time) / 1000.0;

@@ -20,6 +20,10 @@ class Application{
 
         int loop();
 
+        void quit(){
+            toquit = true;
+        }
+
     private:
         uint32_t loop_start_time;
         uint32_t last_update_time;

@@ -3,16 +3,21 @@
 #include "components/basic.hpp"
 #include "components/render.hpp"
 #include "systems/rendering.hpp"
+#include "systems/events.hpp"
 #include "sdlwrap/surface.hpp"
 #include <assert.h>
 #include <iostream>
 namespace core{
+
+class Application;
+
 class World : public entityx::EntityX {
 public:
-    World(){
+    World(Application *papplication):papplication(papplication){
         std::cout << "Constructing world\n";
         systems.add<systems::PositionPrinter>();
         systems.add<systems::RenderSystem>();
+        systems.add<systems::EventSystem>();
         systems.configure();
         auto prender = systems.system<systems::RenderSystem>();
     }
@@ -26,6 +31,9 @@ public:
         auto prender = systems.system<systems::RenderSystem>();
         assert (prender != nullptr);
         prender->init();
+        auto pevent = systems.system<systems::EventSystem>();
+        assert (pevent != nullptr);
+        pevent->init(papplication);
         std::cout << "Initialized systems\n";
 
         std::cout << "Initializing entity \n";
@@ -38,12 +46,16 @@ public:
     }
 
     void update(entityx::TimeDelta dt) {
+        // Events should be handled first (I think?)
+        systems.update<systems::EventSystem>(dt);
         systems.update<systems::PositionPrinter>(dt);
     }
     void render(entityx::TimeDelta dt) {
         systems.update<systems::RenderSystem>(dt);
 
     }
+private:
+    Application *papplication;
 };
 
 }
