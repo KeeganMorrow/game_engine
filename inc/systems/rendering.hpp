@@ -38,6 +38,7 @@ public:
     sdlwrap::Texture *load_texture(const std::string path);
 
 private:
+    components::Spacial &calculate_spacial(const components::Spacial &camera, const components::Spacial &target);
     sdlwrap::Window *pwindow;
     sdlwrap::Render *prender;
 };

@@ -69,10 +69,11 @@ void RenderSystem::update(entityx::EntityManager &es,
         auto ptexture = it->ptexture;
         components::Spacial *prender_spacial;
         if (camera_spacial){
-            prender_spacial = new auto(*pspacial - *(camera_spacial.get()));
+            prender_spacial = &calculate_spacial(*(camera_spacial.get()), *pspacial);
         }else{
             prender_spacial = pspacial;
         }
+
             draw_object_interpolated(*ptexture, *prender_spacial, dt);
 
     }
@@ -114,6 +115,17 @@ sdlwrap::Texture *RenderSystem::load_texture(const std::string path){
     return ptexture;
 }
 
+components::Spacial &RenderSystem::calculate_spacial(
+                                    const components::Spacial &camera,
+                                    const components::Spacial &target)
+{
+    auto result = new auto(target - camera);
+    int win_w, win_h;
+    pwindow->GetSize(&win_w, &win_h);
+    result->pos_x += win_w / 4;
+    result->pos_y += win_h / 4;
+    return *result;
+}
 
 void CameraSystem::update(entityx::EntityManager &es, entityx::EventManager &events, entityx::TimeDelta dt){
     entityx::ComponentHandle<components::RenderCamera>camera;
@@ -130,11 +142,15 @@ void CameraSystem::update(entityx::EntityManager &es, entityx::EventManager &eve
         if (target && target_spacial){
             auto diff_x = camera_spacial->pos_x - target_spacial->pos_x;
             if (( diff_x > 100 ) || ( diff_x < -100 )){
-                camera_spacial->vel_x = -diff_x / 5;
+                camera_spacial->vel_x = -diff_x / 2;
+            }else{
+                camera_spacial->vel_x = 0;
             }
             auto diff_y = camera_spacial->pos_y - target_spacial->pos_y;
             if (( diff_y > 100 ) || ( diff_y < -100 )){
-                camera_spacial->vel_y = -diff_y / 5;
+                camera_spacial->vel_y = -diff_y / 2;
+            }else{
+                camera_spacial->vel_y = 0;
             }
         }
     }
