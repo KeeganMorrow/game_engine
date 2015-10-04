@@ -25,6 +25,12 @@ void RenderSystem::update(entityx::EntityManager &es,
                           entityx::EventManager &events,
                           entityx::TimeDelta dt){
     assert(prender != nullptr);
+    entityx::ComponentHandle<components::RenderCamera> camera;
+    entityx::ComponentHandle<components::Spacial> camera_spacial;
+    for (entityx::Entity entity :es.entities_with_components(camera, camera_spacial)){
+        (void) entity;
+    }
+
     //TODO: Don't ignore return value
     (void)prender->RenderClear();
     es.each<components::RenderTexture, components::Spacial>([this, dt](

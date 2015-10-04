@@ -2,6 +2,12 @@
 #define COMPONENTS_RENDER_HPP
 #include <sdlwrap/surface.hpp>
 namespace components{
+
+struct RenderCamera {
+    RenderCamera():zoomlevel(1.0){}
+    float zoomlevel;
+};
+
 struct RenderTexture {
 public:
     RenderTexture(sdlwrap::Texture *ptex = nullptr): ptex(ptex){}
