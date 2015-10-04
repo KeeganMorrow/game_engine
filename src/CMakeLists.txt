@@ -4,11 +4,15 @@ INCLUDE(FindPkgConfig)
 PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
 PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 
-# TODO: Don't GLOB here
-file(GLOB engine_SRC
-    "core/**.cpp"
-    "systems/**.cpp"
-    "components/**.cpp"
+set(engine_SRC
+    "core/application.cpp"
+    "core/logging.cpp"
+    "core/world.cpp"
+    "systems/events.cpp"
+    "systems/player.cpp"
+    "systems/rendering.cpp"
+    "systems/rendering.cpp"
+    "components/basic.cpp"
 )
 # Define sdlwrap library
 add_library (sdlwrap sdlwrap/render sdlwrap/surface sdlwrap/sdl sdlwrap/window)
