@@ -1,9 +1,10 @@
 #include <entityx/entityx.h>
 #include "core/world.hpp"
+#include "core/logging.hpp"
 
 namespace core{
 World::World(Application *papplication):papplication(papplication){
-    std::cout << "Constructing world\n";
+    LOG(INFO) << "Constructing world";
     systems.add<systems::PositionPrinter>();
     systems.add<systems::RenderSystem>();
     systems.add<systems::EventSystem>();
@@ -16,24 +17,24 @@ World::World(Application *papplication):papplication(papplication){
 // The goal would be to be less tied to entityx
 void World::init(){
 
-    std::cout << "Initializing world\n";
-    std::cout << "Initializing systems\n";
+    LOG(INFO) << "Initializing world";
+    LOG(INFO) << "Initializing systems";
     auto prender = systems.system<systems::RenderSystem>();
     assert (prender != nullptr);
     prender->init();
     auto pevent = systems.system<systems::EventSystem>();
     assert (pevent != nullptr);
     pevent->init(papplication);
-    std::cout << "Initialized systems\n";
+    LOG(INFO) << "Initialized systems";
 
-    std::cout << "Initializing entity \n";
+    LOG(INFO) << "Initializing entity ";
     auto ptex = prender->load_texture("resources/testimage.png");
     entityx::Entity entity = entities.create();
     entity.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 80, 0.0);
     entity.assign<components::RenderTexture>(ptex);
     entity.assign<components::Player>();
-    std::cout << "Initialized entity \n";
-    std::cout << "Initialized world\n";
+    LOG(INFO) << "Initialized entity ";
+    LOG(INFO) << "Initialized world";
 }
 
 void World::update(entityx::TimeDelta dt) {

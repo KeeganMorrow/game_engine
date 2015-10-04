@@ -3,11 +3,16 @@
 #include <string>
 #include <iomanip>
 #include "core/logging.hpp"
+#include <easylogging++.h>
 
-INITIALIZE_EASYLOGGINGPP
+namespace core{
+void LoggerManager::Init(int argv, char* argc[]){
+    START_EASYLOGGINGPP(argv, argc);
+}
 
-namespace logging {
-
-    LoggerManager Manager;
-
+bool LoggerManager::loadConfig(std::string configpath){
+    el::Configurations conf(configpath);
+    el::Loggers::reconfigureAllLoggers(conf);
+    return true;
+}
 }

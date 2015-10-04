@@ -8,7 +8,7 @@
 #include "systems/rendering.hpp"
 #include "sdlwrap/surface.hpp"
 #include <assert.h>
-#include <iostream>
+
 namespace core{
 
 class Application;

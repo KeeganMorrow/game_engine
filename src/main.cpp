@@ -6,9 +6,12 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include "core/application.hpp"
-#include <iostream>
+#include "core/logging.hpp"
+
+INITIALIZE_EASYLOGGINGPP
+
 int main(int argc, char* argv[]) {
-    std::cout << "initializing things\n";
+    LOG(INFO) << "initializing things";
     core::Application *papp = new core::Application(argc, argv);
     papp->init();
     papp->loop();

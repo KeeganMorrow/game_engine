@@ -3,30 +3,21 @@
 #ifndef _CORE_LOGGING_H_
 #define _CORE_LOGGING_H_
 #include <string>
+#define ELPP_UNICODE 1
 #include <easylogging++.h>
-
-namespace logging {
-
+namespace core{
+    // Handles configuration (but NOT distribution!) of logging
     class LoggerManager {
     public:
         LoggerManager(){
         }
         //TODO: Should I be tracking and unregistering loggers?
         ~LoggerManager(){}
-        void Init(int argv, char* argc[]){
-            START_EASYLOGGINGPP(argv, argc);
-        }
 
-        bool loadConfig(std::string configpath){
-            el::Configurations conf(configpath);
-            el::Loggers::reconfigureAllLoggers(conf);
-            return true;
-        }
+        void Init(int argv, char* argc[]);
 
-        void registerLogger(std::string loggername){
-            el::Loggers::getLogger(loggername,true);
-        }
-    private:
+        bool loadConfig(std::string configpath);
+
     };
 
     extern LoggerManager Manager;

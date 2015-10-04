@@ -3,7 +3,6 @@
 #include <entityx/entityx.h>
 #include <string>
 #include <assert.h>
-#include <iostream>
 
 namespace core{
     class Application;

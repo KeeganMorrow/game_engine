@@ -1,11 +1,11 @@
 #include "systems/rendering.hpp"
 #include <SDL.h>
-#include <iostream>
+#include "core/logging.hpp"
 
 namespace systems{
 void RenderSystem::init(void){
     // Should we call deinit here?
-    std::cout << "Initializing RenderSystem\n";
+    LOG(INFO) << "Initializing RenderSystem";
     pwindow = new sdlwrap::Window("Engine", 0, 0, 640, 480, 0);
     prender = new sdlwrap::Render(pwindow, -1,
             SDL_RENDERER_ACCELERATED);
@@ -62,12 +62,12 @@ void RenderSystem::draw_object_interpolated(components::RenderTexture &texture,
 }
 
 sdlwrap::Texture *RenderSystem::load_texture(const std::string path){
-    std::cout << "loading texture " << path <<'\n';
+    LOG(INFO) << "loading texture " << path;
     auto psurface = new sdlwrap::Surface();
-    std::cout << "initializing surface\n";
+    LOG(INFO) << "initializing surface";
     psurface->init(std::string("resources/testimage.png"));
     auto ptexture = new sdlwrap::Texture();
-    std::cout << "initializing texture\n";
+    LOG(INFO) << "initializing texture";
     ptexture->init(prender, psurface);
     return ptexture;
 }

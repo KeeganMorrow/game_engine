@@ -1,7 +1,6 @@
 #include "core/application.hpp"
 #include "sdlwrap/surface.hpp"
 #include <string>
-#include <iostream>
 
 namespace core{
 

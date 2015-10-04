@@ -2,7 +2,6 @@
 #include "components/player.hpp"
 #include "core/application.hpp"
 #include <SDL.h>
-#include <iostream>
 #include <assert.h>
 
 // We are bypassing sdlwrap here - should this be changed in the future?

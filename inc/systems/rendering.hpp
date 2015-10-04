@@ -8,7 +8,7 @@
 #include "sdlwrap/render.hpp"
 #include <string>
 #include <assert.h>
-#include <iostream>
+
 namespace systems{
 
 class PositionPrinter : public entityx::System<PositionPrinter> {

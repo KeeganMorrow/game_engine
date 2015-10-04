@@ -1,7 +1,6 @@
 #include "systems/events.hpp"
 #include "core/application.hpp"
 #include <SDL.h>
-#include <iostream>
 #include <assert.h>
 #include <stdio.h>
 
