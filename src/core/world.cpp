@@ -1,5 +1,12 @@
-#include <entityx/entityx.h>
 #include "core/world.hpp"
+#include "components/basic.hpp"
+#include "components/render.hpp"
+#include "components/player.hpp"
+#include "systems/events.hpp"
+#include "systems/player.hpp"
+#include "systems/rendering.hpp"
+#include "sdlwrap/surface.hpp"
+#include <assert.h>
 #include "core/logging.hpp"
 
 namespace core{

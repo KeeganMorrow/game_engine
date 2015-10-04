@@ -1,13 +1,6 @@
 #ifndef WORLD_HPP
 #define WORLD_HPP
-#include "components/basic.hpp"
-#include "components/render.hpp"
-#include "components/player.hpp"
-#include "systems/events.hpp"
-#include "systems/player.hpp"
-#include "systems/rendering.hpp"
-#include "sdlwrap/surface.hpp"
-#include <assert.h>
+#include <entityx/entityx.h>
 
 namespace core{
 

@@ -1,8 +1,7 @@
 #ifndef SYSTEMS_PLAYER_HPP
 #define SYSTEMS_PLAYER_HPP
 #include <entityx/entityx.h>
-#include <string>
-#include <assert.h>
+#include <SDL.h>
 
 namespace core{
     class Application;

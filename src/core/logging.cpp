@@ -3,7 +3,6 @@
 #include <string>
 #include <iomanip>
 #include "core/logging.hpp"
-#include <easylogging++.h>
 
 namespace core{
 void LoggerManager::Init(int argv, char* argc[]){
