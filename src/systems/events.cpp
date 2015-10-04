@@ -3,10 +3,10 @@
 #include <SDL.h>
 #include <iostream>
 #include <assert.h>
+#include <stdio.h>
 
 // We are bypassing sdlwrap here - should this be changed in the future?
 namespace systems{
-struct InputEvent;
 
 void EventSystem::init(core::Application *papp){
     papplication = papp;
@@ -25,8 +25,11 @@ void EventSystem::update(entityx::EntityManager &es,
         case SDL_QUIT:
             papplication->quit();
             break;
+        case SDL_KEYDOWN:
+        case SDL_KEYUP:
+            events.emit<SDL_KeyboardEvent>(event.key);
+            break;
         default:
-            //Unhandled event
             break;
         }
     }

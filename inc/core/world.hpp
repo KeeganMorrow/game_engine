@@ -2,8 +2,10 @@
 #define WORLD_HPP
 #include "components/basic.hpp"
 #include "components/render.hpp"
-#include "systems/rendering.hpp"
+#include "components/player.hpp"
 #include "systems/events.hpp"
+#include "systems/player.hpp"
+#include "systems/rendering.hpp"
 #include "sdlwrap/surface.hpp"
 #include <assert.h>
 #include <iostream>
@@ -18,6 +20,7 @@ public:
         systems.add<systems::PositionPrinter>();
         systems.add<systems::RenderSystem>();
         systems.add<systems::EventSystem>();
+        systems.add<systems::PlayerControlSystem>();
         systems.configure();
         auto prender = systems.system<systems::RenderSystem>();
     }
@@ -41,6 +44,7 @@ public:
         entityx::Entity entity = entities.create();
         entity.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 80, 0.0);
         entity.assign<components::RenderTexture>(ptex);
+        entity.assign<components::Player>();
         std::cout << "Initialized entity \n";
         std::cout << "Initialized world\n";
     }
@@ -48,6 +52,7 @@ public:
     void update(entityx::TimeDelta dt) {
         // Events should be handled first (I think?)
         systems.update<systems::EventSystem>(dt);
+        systems.update<systems::PlayerControlSystem>(dt);
         systems.update<systems::PositionPrinter>(dt);
     }
     void render(entityx::TimeDelta dt) {
