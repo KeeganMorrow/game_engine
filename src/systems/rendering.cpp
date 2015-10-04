@@ -30,17 +30,22 @@ void RenderSystem::update(entityx::EntityManager &es,
     for (entityx::Entity entity :es.entities_with_components(camera, camera_spacial)){
         (void) entity;
     }
-
     //TODO: Don't ignore return value
     (void)prender->RenderClear();
-    es.each<components::RenderTexture, components::Spacial>([this, dt](
+    es.each<components::RenderTexture, components::Spacial>([this, dt, camera_spacial](
                 entityx::Entity entity,
                 components::RenderTexture &texture,
                 components::Spacial &spacial) {
-            draw_object_interpolated(texture, spacial, dt);
+            components::Spacial *prender_spacial = nullptr;
+            if (camera_spacial){
+                prender_spacial = new auto(spacial - *(camera_spacial.get()));
+            }else{
+                prender_spacial = &spacial;
+            }
+
+            draw_object_interpolated(texture, *prender_spacial, dt);
 
     });
-
     //TODO: Don't ignore return value
     (void)prender->RenderPresent();
 }

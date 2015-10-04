@@ -40,6 +40,10 @@ void World::init(){
     entity.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 80, 0.0);
     entity.assign<components::RenderTexture>(ptex);
     entity.assign<components::Player>();
+
+    auto camera = entities.create();
+    camera.assign<components::Spacial>(0.0, 0.0, 0.0, 0.0, 0.0, 80, 0.0);
+    camera.assign<components::RenderCamera>();
     LOG(INFO) << "Initialized entity ";
     LOG(INFO) << "Initialized world";
 }
