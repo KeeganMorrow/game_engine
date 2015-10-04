@@ -1,3 +1,5 @@
+#include <vector>
+#include <algorithm>
 #include "systems/rendering.hpp"
 #include <SDL.h>
 #include "core/logging.hpp"
@@ -20,6 +22,21 @@ void RenderSystem::deinit(void){
     }
 }
 
+struct RenderInfo{
+    RenderInfo(components::Spacial *pspacial,
+               components::RenderData *pdata,
+               components::RenderTexture *ptexture):
+        pspacial(pspacial), pdata(pdata), ptexture(ptexture){}
+
+    components::Spacial *pspacial;
+    components::RenderData *pdata;
+    components::RenderTexture *ptexture;
+};
+
+bool renderinfo_check_layer(const RenderInfo &i1, const RenderInfo &i2){
+    return (i1.pdata->layer < i2.pdata->layer);
+}
+
 //Note: dt should be the time since the last logic update!!
 void RenderSystem::update(entityx::EntityManager &es,
                           entityx::EventManager &events,
@@ -30,22 +47,36 @@ void RenderSystem::update(entityx::EntityManager &es,
     for (entityx::Entity entity :es.entities_with_components(camera, camera_spacial)){
         (void) entity;
     }
+
+    std::vector<RenderInfo> render_targets;
+    entityx::ComponentHandle<components::RenderData> rdata;
+    for (entityx::Entity entity : es.entities_with_components(rdata)){
+        // Pretend there are checks to see if it makes sense to render the object here
+        auto texture = entity.component<components::RenderTexture>();
+        auto spacial = entity.component<components::Spacial>();
+        if ( texture && spacial) {
+            render_targets.emplace_back(spacial.get(), rdata.get(), texture.get());
+        }
+    }
+    // Sort targets by render layer:
+    std::sort(render_targets.begin(), render_targets.end(), renderinfo_check_layer);
     //TODO: Don't ignore return value
     (void)prender->RenderClear();
-    es.each<components::RenderTexture, components::Spacial>([this, dt, camera_spacial](
-                entityx::Entity entity,
-                components::RenderTexture &texture,
-                components::Spacial &spacial) {
-            components::Spacial *prender_spacial = nullptr;
-            if (camera_spacial){
-                prender_spacial = new auto(spacial - *(camera_spacial.get()));
-            }else{
-                prender_spacial = &spacial;
-            }
 
-            draw_object_interpolated(texture, *prender_spacial, dt);
+    for (auto it=render_targets.begin(); it!=render_targets.end(); ++it){
+        auto pspacial = it->pspacial;
+        auto pdata = it->pdata;
+        auto ptexture = it->ptexture;
+        components::Spacial *prender_spacial;
+        if (camera_spacial){
+            prender_spacial = new auto(*pspacial - *(camera_spacial.get()));
+        }else{
+            prender_spacial = pspacial;
+        }
+            draw_object_interpolated(*ptexture, *prender_spacial, dt);
 
-    });
+    }
+
     //TODO: Don't ignore return value
     (void)prender->RenderPresent();
 }
@@ -76,7 +107,7 @@ sdlwrap::Texture *RenderSystem::load_texture(const std::string path){
     LOG(INFO) << "loading texture " << path;
     auto psurface = new sdlwrap::Surface();
     LOG(INFO) << "initializing surface";
-    psurface->init(std::string("resources/testimage.png"));
+    psurface->init(path);
     auto ptexture = new sdlwrap::Texture();
     LOG(INFO) << "initializing texture";
     ptexture->init(prender, psurface);

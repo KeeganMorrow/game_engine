@@ -26,5 +26,10 @@ private:
     sdlwrap::Texture *ptex;
 };
 
+struct RenderData {
+    RenderData(int layer):layer(layer){}
+    int layer;
+    // Later information about render distance, etc also
+};
 }
 #endif /* COMPONENTS_RENDER_HPP */

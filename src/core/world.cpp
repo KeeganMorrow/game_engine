@@ -39,6 +39,7 @@ void World::init(){
     entityx::Entity entity = entities.create();
     entity.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 80, 0.0);
     entity.assign<components::RenderTexture>(ptex);
+    entity.assign<components::RenderData>(1);
     entity.assign<components::Player>();
 
     auto camera = entities.create();
@@ -46,6 +47,12 @@ void World::init(){
     camera.assign<components::RenderCamera>();
     LOG(INFO) << "Initialized entity ";
     LOG(INFO) << "Initialized world";
+
+    auto pbackground = prender->load_texture("resources/testbackground.png");
+    entityx::Entity background = entities.create();
+    background.assign<components::Spacial>(0.0, 0.0, 5120.0, 5120.0, 0.0, 0.0, 0.0);
+    background.assign<components::RenderTexture>(pbackground);
+    background.assign<components::RenderData>(0);
 }
 
 void World::update(entityx::TimeDelta dt) {
