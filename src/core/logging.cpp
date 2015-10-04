@@ -2,7 +2,7 @@
 
 #include <string>
 #include <iomanip>
-#include "core/logging/logging.hpp"
+#include "core/logging.hpp"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -10,4 +10,4 @@ namespace logging {
 
     LoggerManager Manager;
 
-};
+}

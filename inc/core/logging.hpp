@@ -20,6 +20,7 @@ namespace logging {
         bool loadConfig(std::string configpath){
             el::Configurations conf(configpath);
             el::Loggers::reconfigureAllLoggers(conf);
+            return true;
         }
 
         void registerLogger(std::string loggername){
@@ -29,6 +30,6 @@ namespace logging {
     };
 
     extern LoggerManager Manager;
-};
+}
 
 #endif  // _CORE_LOGGING_H_
