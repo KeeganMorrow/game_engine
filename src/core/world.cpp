@@ -15,6 +15,7 @@ World::World(Application *papplication):papplication(papplication){
     systems.add<systems::PositionPrinter>();
     systems.add<systems::RenderSystem>();
     systems.add<systems::EventSystem>();
+    systems.add<systems::CameraSystem>();
     systems.add<systems::PlayerControlSystem>();
     systems.configure();
     auto prender = systems.system<systems::RenderSystem>();
@@ -41,6 +42,7 @@ void World::init(){
     entity.assign<components::RenderTexture>(ptex);
     entity.assign<components::RenderData>(1);
     entity.assign<components::Player>();
+    entity.assign<components::RenderCameraTarget>();
 
     auto camera = entities.create();
     camera.assign<components::Spacial>(0.0, 0.0, 0.0, 0.0, 0.0, 80, 0.0);
@@ -62,6 +64,7 @@ void World::update(entityx::TimeDelta dt) {
     systems.update<systems::PositionPrinter>(dt);
 }
 void World::render(entityx::TimeDelta dt) {
+    systems.update<systems::CameraSystem>(dt);
     systems.update<systems::RenderSystem>(dt);
 
 }

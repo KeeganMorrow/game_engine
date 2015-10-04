@@ -42,6 +42,16 @@ private:
     sdlwrap::Render *prender;
 };
 
+// Updates the cameras to track their target entities.
+class CameraSystem : public entityx::System<CameraSystem> {
+public:
+    CameraSystem(){}
+
+    void update(entityx::EntityManager &es, entityx::EventManager &events, entityx::TimeDelta dt) override;
+
+private:
+
+};
 }
 
 #endif /* RENDERING_HPP */

@@ -113,4 +113,26 @@ sdlwrap::Texture *RenderSystem::load_texture(const std::string path){
     ptexture->init(prender, psurface);
     return ptexture;
 }
+
+
+void CameraSystem::update(entityx::EntityManager &es, entityx::EventManager &events, entityx::TimeDelta dt){
+    entityx::ComponentHandle<components::RenderCamera>camera;
+    entityx::ComponentHandle<components::Spacial>camera_spacial;
+    for (entityx::Entity entity :es.entities_with_components(camera, camera_spacial)){
+        (void) entity;
+    }
+    if (camera && camera_spacial){
+        entityx::ComponentHandle<components::RenderCameraTarget>target;
+        entityx::ComponentHandle<components::Spacial>target_spacial;
+        for (entityx::Entity entity :es.entities_with_components(target, target_spacial)){
+            (void) entity;
+        }
+        if (target && target_spacial){
+            camera_spacial->pos_x = target_spacial->pos_x;
+            camera_spacial->pos_y = target_spacial->pos_y;
+        }
+    }
 }
+}
+
+

@@ -8,6 +8,8 @@ struct RenderCamera {
     float zoomlevel;
 };
 
+struct RenderCameraTarget{};
+
 struct RenderTexture {
 public:
     RenderTexture(sdlwrap::Texture *ptex = nullptr): ptex(ptex){}
