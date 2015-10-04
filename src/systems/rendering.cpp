@@ -128,8 +128,14 @@ void CameraSystem::update(entityx::EntityManager &es, entityx::EventManager &eve
             (void) entity;
         }
         if (target && target_spacial){
-            camera_spacial->pos_x = target_spacial->pos_x;
-            camera_spacial->pos_y = target_spacial->pos_y;
+            auto diff_x = camera_spacial->pos_x - target_spacial->pos_x;
+            if (( diff_x > 100 ) || ( diff_x < -100 )){
+                camera_spacial->vel_x = -diff_x / 5;
+            }
+            auto diff_y = camera_spacial->pos_y - target_spacial->pos_y;
+            if (( diff_y > 100 ) || ( diff_y < -100 )){
+                camera_spacial->vel_y = -diff_y / 5;
+            }
         }
     }
 }

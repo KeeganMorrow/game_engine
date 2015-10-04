@@ -45,7 +45,7 @@ void World::init(){
     entity.assign<components::RenderCameraTarget>();
 
     auto camera = entities.create();
-    camera.assign<components::Spacial>(0.0, 0.0, 0.0, 0.0, 0.0, 80, 0.0);
+    camera.assign<components::Spacial>(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
     camera.assign<components::RenderCamera>();
     LOG(INFO) << "Initialized entity ";
     LOG(INFO) << "Initialized world";
