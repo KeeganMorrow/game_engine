@@ -10,31 +10,9 @@
 namespace core{
 class Application{
     public:
-        Application(int argc, char *argv[]):
-            loop_start_time(0),last_update_time(-1),
-            pconfig(nullptr),plogger(nullptr),pworld(nullptr)
-        {
-            plogger = new core::LoggerManager(argc, argv);
-            plogger->loadConfig(std::string("logging.conf"));
-            pconfig = new core::Config(argc, argv);
-            pconfig->load_config();
-            // TODO(KM, "Add some arument parsing type stuff here")
-            pworld = new core::World(this, pconfig);
+        Application(int argc, char *argv[]);
 
-            toquit = false;
-        }
-
-        ~Application(){
-            if (pworld){
-                delete pworld;
-            }
-            if (plogger){
-                delete plogger;
-            }
-            if (pconfig){
-                delete pconfig;
-            }
-        }
+        ~Application();
 
         int loop();
 
