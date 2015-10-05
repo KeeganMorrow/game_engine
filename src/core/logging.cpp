@@ -5,11 +5,12 @@
 #include "core/logging.hpp"
 
 namespace core{
-void LoggerManager::Init(int argv, char* argc[]){
+LoggerManager::LoggerManager(int argv, char* argc[]){
     START_EASYLOGGINGPP(argv, argc);
 }
 
 bool LoggerManager::loadConfig(std::string configpath){
+    LOG(INFO) << "Loading logging configuration from " << configpath;
     el::Configurations conf(configpath);
     el::Loggers::reconfigureAllLoggers(conf);
     return true;

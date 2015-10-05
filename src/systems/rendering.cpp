@@ -12,6 +12,7 @@ RenderSystem::RenderSystem():pwindow(nullptr), prender(nullptr){
             SDL_RENDERER_ACCELERATED);
 }
 RenderSystem::~RenderSystem(){
+    LOG(INFO) << "Destroying RenderSystem";
     if (pwindow){
         delete pwindow;
     }

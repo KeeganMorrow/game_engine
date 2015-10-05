@@ -4,6 +4,7 @@
 #include "components/player.hpp"
 #include "components/basic.hpp"
 #include "core/application.hpp"
+#include "core/logging.hpp"
 
 // We are bypassing sdlwrap here - should this be changed in the future?
 namespace systems{
@@ -27,6 +28,7 @@ void PlayerControlSystem::configure(entityx::EventManager &event_manager) {
 }
 
 void PlayerControlSystem::receive(const SDL_KeyboardEvent &event){
+    LOG(DEBUG) << "Keypress event recieved";
     if (! event.repeat){
         if(event.keysym.sym == SDLK_w){
             if (event.type == SDL_KEYDOWN){

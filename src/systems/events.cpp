@@ -1,8 +1,11 @@
 #include "systems/events.hpp"
 #include "core/application.hpp"
+
 #include <SDL.h>
 #include <assert.h>
 #include <stdio.h>
+
+#include "core/logging.hpp"
 
 // We are bypassing sdlwrap here - should this be changed in the future?
 namespace systems{
@@ -19,7 +22,9 @@ void EventSystem::update(entityx::EntityManager &es,
             break;
         case SDL_KEYDOWN:
         case SDL_KEYUP:
+            LOG(DEBUG) << "Emitting keypress";
             events.emit<SDL_KeyboardEvent>(event.key);
+            LOG(DEBUG) << "keypress emitted";
             break;
         default:
             break;

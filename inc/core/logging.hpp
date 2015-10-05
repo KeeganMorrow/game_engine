@@ -9,18 +9,14 @@ namespace core{
     // Handles configuration (but NOT distribution!) of logging
     class LoggerManager {
     public:
-        LoggerManager(){
-        }
+        LoggerManager(int argv, char* argc[]);
+
         //TODO: Should I be tracking and unregistering loggers?
         ~LoggerManager(){}
-
-        void Init(int argv, char* argc[]);
 
         bool loadConfig(std::string configpath);
 
     };
-
-    extern LoggerManager Manager;
 }
 
 #endif  // _CORE_LOGGING_H_
