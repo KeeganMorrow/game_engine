@@ -1,19 +1,17 @@
-#include <vector>
 #include <algorithm>
 #include "systems/rendering.hpp"
 #include <SDL.h>
 #include "core/logging.hpp"
 
 namespace systems{
-void RenderSystem::init(void){
-    // Should we call deinit here?
+
+RenderSystem::RenderSystem():pwindow(nullptr), prender(nullptr){
     LOG(INFO) << "Initializing RenderSystem";
     pwindow = new sdlwrap::Window("Engine", 0, 0, 640, 480, 0);
     prender = new sdlwrap::Render(pwindow, -1,
             SDL_RENDERER_ACCELERATED);
 }
-
-void RenderSystem::deinit(void){
+RenderSystem::~RenderSystem(){
     if (pwindow){
         delete pwindow;
     }
@@ -21,7 +19,6 @@ void RenderSystem::deinit(void){
         delete prender;
     }
 }
-
 struct RenderInfo{
     RenderInfo(components::Spacial *pspacial,
                components::RenderData *pdata,
@@ -65,17 +62,15 @@ void RenderSystem::update(entityx::EntityManager &es,
 
     for (auto it=render_targets.begin(); it!=render_targets.end(); ++it){
         auto pspacial = it->pspacial;
-        auto pdata = it->pdata;
         auto ptexture = it->ptexture;
-        components::Spacial *prender_spacial;
+        components::Spacial *prender_spacial(nullptr);
         if (camera_spacial){
-            prender_spacial = &calculate_spacial(*(camera_spacial.get()), *pspacial);
+            prender_spacial = &calculate_spacial((camera_spacial.get()), pspacial);
         }else{
             prender_spacial = pspacial;
         }
-
-            draw_object_interpolated(*ptexture, *prender_spacial, dt);
-
+        draw_object_interpolated(*ptexture, *prender_spacial, dt);
+        delete prender_spacial;
     }
 
     //TODO: Don't ignore return value
@@ -89,7 +84,7 @@ void RenderSystem::draw_object(components::RenderTexture &texture,
                                        spacial.size_y);
 
     //TODO: Don't ignore return value
-    (void)prender->RenderCopy(texture.get_texture(), nullptr, &pdst);
+    (void)prender->RenderCopy(texture.get_texture().get(), nullptr, &pdst);
 }
 
 void RenderSystem::draw_object_interpolated(components::RenderTexture &texture,
@@ -101,30 +96,38 @@ void RenderSystem::draw_object_interpolated(components::RenderTexture &texture,
                                        spacial.size_y);
 
     //TODO: Don't ignore return value
-    (void)prender->RenderCopy(texture.get_texture(), nullptr, &pdst);
+    (void)prender->RenderCopy(texture.get_texture().get(), nullptr, &pdst);
 }
 
-sdlwrap::Texture *RenderSystem::load_texture(const std::string path){
-    LOG(INFO) << "loading texture " << path;
-    auto psurface = new sdlwrap::Surface();
-    LOG(INFO) << "initializing surface";
-    psurface->init(path);
-    auto ptexture = new sdlwrap::Texture();
-    LOG(INFO) << "initializing texture";
-    ptexture->init(prender, psurface);
+std::shared_ptr<sdlwrap::Texture> RenderSystem::load_texture(const std::string path){
+    auto find_result = textures.find(path);
+    if (find_result != textures.end()){
+        LOG(INFO) << "texture " << path << "already loaded";
+        return find_result->second;
+    }
+    LOG(INFO) << "creating surface " << path;
+    auto surface = sdlwrap::Surface(path);
+    LOG(INFO) << "creating texture from surface";
+    auto ptexture = std::make_shared<sdlwrap::Texture>(prender, &surface);
     return ptexture;
 }
 
 components::Spacial &RenderSystem::calculate_spacial(
-                                    const components::Spacial &camera,
-                                    const components::Spacial &target)
+                                    const components::Spacial *pcamera,
+                                    const components::Spacial *ptarget)
 {
-    auto result = new auto(target - camera);
-    int win_w, win_h;
-    pwindow->GetSize(&win_w, &win_h);
-    result->pos_x += win_w / 4;
-    result->pos_y += win_h / 4;
-    return *result;
+    assert(ptarget != nullptr);
+    components::Spacial *presult = nullptr;
+    if (pcamera == nullptr){
+        presult = new auto(*pcamera);
+    }else{
+        presult = new auto(*ptarget - *pcamera);
+        int win_w, win_h;
+        pwindow->GetSize(&win_w, &win_h);
+        presult->pos_x += win_w / 4;
+        presult->pos_y += win_h / 4;
+    }
+    return *presult;
 }
 
 void CameraSystem::update(entityx::EntityManager &es, entityx::EventManager &events, entityx::TimeDelta dt){

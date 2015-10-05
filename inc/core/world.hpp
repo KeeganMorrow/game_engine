@@ -10,9 +10,7 @@ class World : public entityx::EntityX {
 public:
     World(Application *papplication);
 
-    //TODO : Consider adding another layer of abstraction between "systems" and logic?
-    // The goal would be to be less tied to entityx
-    void init();
+    // All resources should be cleaned up by base class so far
 
     void update(entityx::TimeDelta dt);
 

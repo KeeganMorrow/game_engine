@@ -7,13 +7,6 @@
 // We are bypassing sdlwrap here - should this be changed in the future?
 namespace systems{
 
-void EventSystem::init(core::Application *papp){
-    papplication = papp;
-}
-
-void EventSystem::deinit(void){
-}
-
 //Note: dt should be the time since the last logic update!!
 void EventSystem::update(entityx::EntityManager &es,
                           entityx::EventManager &events,

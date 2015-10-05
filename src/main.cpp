@@ -13,7 +13,6 @@ INITIALIZE_EASYLOGGINGPP
 int main(int argc, char* argv[]) {
     LOG(INFO) << "initializing things";
     core::Application *papp = new core::Application(argc, argv);
-    papp->init();
     papp->loop();
     delete papp;
     return 0;

@@ -14,25 +14,17 @@ World::World(Application *papplication):papplication(papplication){
     LOG(INFO) << "Constructing world";
     systems.add<systems::PositionPrinter>();
     systems.add<systems::RenderSystem>();
-    systems.add<systems::EventSystem>();
+    systems.add<systems::EventSystem>(papplication);
     systems.add<systems::CameraSystem>();
     systems.add<systems::PlayerControlSystem>();
     systems.configure();
-    auto prender = systems.system<systems::RenderSystem>();
-}
-
-//TODO : Consider adding another layer of abstraction between "systems" and logic?
-// The goal would be to be less tied to entityx
-void World::init(){
 
     LOG(INFO) << "Initializing world";
     LOG(INFO) << "Initializing systems";
     auto prender = systems.system<systems::RenderSystem>();
     assert (prender != nullptr);
-    prender->init();
     auto pevent = systems.system<systems::EventSystem>();
     assert (pevent != nullptr);
-    pevent->init(papplication);
     LOG(INFO) << "Initialized systems";
 
     LOG(INFO) << "Initializing entity ";
@@ -47,15 +39,18 @@ void World::init(){
     auto camera = entities.create();
     camera.assign<components::Spacial>(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
     camera.assign<components::RenderCamera>();
-    LOG(INFO) << "Initialized entity ";
-    LOG(INFO) << "Initialized world";
+    LOG(INFO) << "Initialized Camera";
 
     auto pbackground = prender->load_texture("resources/testbackground.png");
     entityx::Entity background = entities.create();
     background.assign<components::Spacial>(0.0, 0.0, 5120.0, 5120.0, 0.0, 0.0, 0.0);
     background.assign<components::RenderTexture>(pbackground);
     background.assign<components::RenderData>(0);
+    LOG(INFO) << "Initialized Background";
 }
+
+//TODO : Consider adding another layer of abstraction between "systems" and logic?
+// The goal would be to be less tied to entityx
 
 void World::update(entityx::TimeDelta dt) {
     // Events should be handled first (I think?)

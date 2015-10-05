@@ -1,5 +1,6 @@
 #ifndef COMPONENTS_RENDER_HPP
 #define COMPONENTS_RENDER_HPP
+#include <memory>
 #include <sdlwrap/surface.hpp>
 namespace components{
 
@@ -12,20 +13,18 @@ struct RenderCameraTarget{};
 
 struct RenderTexture {
 public:
-    RenderTexture(sdlwrap::Texture *ptex = nullptr): ptex(ptex){}
+    RenderTexture(std::shared_ptr<sdlwrap::Texture> ptexture): ptex(ptexture){}
 
-    sdlwrap::Texture *get_texture(void){
+    std::shared_ptr<sdlwrap::Texture> get_texture(void){
         return ptex;
     }
 
-    void set_texture(sdlwrap::Texture *pnew){
-        if (ptex){
-            delete ptex;
-        }
+    void set_texture(std::shared_ptr<sdlwrap::Texture> pnew){
+        // Remember - this class does not manage the resources!!
         ptex = pnew;
     }
 private:
-    sdlwrap::Texture *ptex;
+    std::shared_ptr<sdlwrap::Texture> ptex;
 };
 
 struct RenderData {

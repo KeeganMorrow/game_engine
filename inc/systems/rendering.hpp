@@ -1,5 +1,8 @@
 #ifndef RENDERING_HPP
 #define RENDERING_HPP
+#include <string>
+#include <unordered_map>
+#include <memory>
 #include <entityx/entityx.h>
 #include "components/basic.hpp"
 #include "components/render.hpp"
@@ -25,22 +28,23 @@ public:
 
 class RenderSystem : public entityx::System<RenderSystem> {
 public:
-    RenderSystem():pwindow(nullptr), prender(nullptr){}
-    void init(void);
+    RenderSystem();
 
-    void deinit(void);
+    ~RenderSystem();
 
     void update(entityx::EntityManager &es, entityx::EventManager &events, entityx::TimeDelta dt) override;
 
     void draw_object(components::RenderTexture &texture, components::Spacial &spacial);
 
     void draw_object_interpolated(components::RenderTexture &texture, components::Spacial &spacial, float dt);
-    sdlwrap::Texture *load_texture(const std::string path);
+
+    std::shared_ptr<sdlwrap::Texture>load_texture(const std::string path);
 
 private:
-    components::Spacial &calculate_spacial(const components::Spacial &camera, const components::Spacial &target);
+    components::Spacial &calculate_spacial(const components::Spacial *camera, const components::Spacial *target);
     sdlwrap::Window *pwindow;
     sdlwrap::Render *prender;
+    std::unordered_map<std::string, std::shared_ptr<sdlwrap::Texture>> textures;
 };
 
 // Updates the cameras to track their target entities.

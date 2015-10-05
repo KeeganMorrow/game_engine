@@ -10,13 +10,13 @@ class Application{
     public:
         Application(int argc, char *arv[]):loop_start_time(0),last_update_time(-1){
             // TODO(KM, "Add some arument parsing type stuff here")
+            pworld = new core::World(this);
+            toquit = false;
         }
 
         ~Application(){
             delete pworld;
         }
-
-        void init();
 
         int loop();
 

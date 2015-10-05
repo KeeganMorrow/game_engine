@@ -24,17 +24,17 @@ namespace sdlwrap{
         return prect;
     }
 
-    void Surface::init(std::string filepath){
-        psurface = IMG_Load(filepath.c_str());
+    Surface::Surface(const std::string filepath):psurface(nullptr){
+        psurface = std::shared_ptr<SDL_Surface>(IMG_Load(filepath.c_str()));
         if (psurface == nullptr){
             throw exMissingFile(filepath);
         }
     }
-    void Texture::init(Render *prenderer, Surface *psurface){
-        prenderer = prenderer;
+
+    Texture::Texture(Render *prend, Surface *psurface):prenderer(prend), ptexture(nullptr){
         ptexture = SDL_CreateTextureFromSurface(
                         prenderer->get_renderer(),
-                        psurface->get_surface()
+                        psurface->get_surface().get()
                     );
     }
 }

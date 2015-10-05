@@ -4,13 +4,6 @@
 
 namespace core{
 
-void Application::init(){
-    // TODO(KM, "Remove magic numbers")
-    pworld = new core::World(this);
-    pworld->init();
-    toquit = false;
-}
-
 int Application::loop(){
 
     while(toquit != true){

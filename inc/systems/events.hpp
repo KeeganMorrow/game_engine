@@ -12,11 +12,7 @@ namespace systems{
 
 class EventSystem : public entityx::System<EventSystem> {
 public:
-    EventSystem(void):papplication(nullptr){}
-
-    void init(core::Application *papplication);
-
-    void deinit(void);
+    EventSystem(core::Application *papp):papplication(papp){}
 
     void update(entityx::EntityManager &es, entityx::EventManager &events, entityx::TimeDelta dt) override;
 
