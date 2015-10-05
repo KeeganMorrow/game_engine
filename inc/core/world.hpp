@@ -5,10 +5,11 @@
 namespace core{
 
 class Application;
+class Config;
 
 class World : public entityx::EntityX {
 public:
-    World(Application *papplication);
+    World(Application *papplication, Config *pconfig);
 
     // All resources should be cleaned up by base class so far
 
@@ -18,6 +19,7 @@ public:
 
 private:
     Application *papplication;
+    Config *pconfig;
 };
 
 }

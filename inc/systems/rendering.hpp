@@ -11,6 +11,7 @@
 #include "sdlwrap/render.hpp"
 #include <string>
 #include <assert.h>
+#include "core/config.hpp"
 
 namespace systems{
 
@@ -28,7 +29,7 @@ public:
 
 class RenderSystem : public entityx::System<RenderSystem> {
 public:
-    RenderSystem();
+    RenderSystem(core::Config *pconfig);
 
     ~RenderSystem();
 
@@ -44,6 +45,7 @@ private:
     components::Spacial &calculate_spacial(const components::Spacial *camera, const components::Spacial *target);
     sdlwrap::Window *pwindow;
     sdlwrap::Render *prender;
+    core::Config *pconfig;
     std::unordered_map<std::string, std::shared_ptr<sdlwrap::Texture>> textures;
 };
 

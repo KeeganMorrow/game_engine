@@ -6,6 +6,7 @@ PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 
 set(engine_SRC
     "core/application.cpp"
+    "core/config.cpp"
     "core/logging.cpp"
     "core/world.cpp"
     "systems/events.cpp"
@@ -18,6 +19,7 @@ set(engine_SRC
 add_library (sdlwrap sdlwrap/render sdlwrap/surface sdlwrap/sdl sdlwrap/window)
 target_include_directories(sdlwrap PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../inc/sdlwrap")
 target_include_directories(sdlwrap PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../lib/easyloggingpp/src")
+target_include_directories(sdlwrap PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../lib/json/src")
 target_link_libraries(sdlwrap ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
 
 # Define engine executable

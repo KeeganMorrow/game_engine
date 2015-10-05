@@ -5,9 +5,9 @@
 
 namespace systems{
 
-RenderSystem::RenderSystem():pwindow(nullptr), prender(nullptr){
+RenderSystem::RenderSystem(core::Config *pconfig):pwindow(nullptr), prender(nullptr), pconfig(pconfig){
     LOG(INFO) << "Initializing RenderSystem";
-    pwindow = new sdlwrap::Window("Engine", 0, 0, 640, 480, 0);
+    pwindow = new sdlwrap::Window("Engine", 0, 0, pconfig->res_x, pconfig->res_y, 0);
     prender = new sdlwrap::Render(pwindow, -1,
             SDL_RENDERER_ACCELERATED);
 }

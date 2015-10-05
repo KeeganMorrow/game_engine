@@ -1,4 +1,5 @@
 #include "core/world.hpp"
+#include "core/config.hpp"
 #include "components/basic.hpp"
 #include "components/render.hpp"
 #include "components/pathfinding.hpp"
@@ -12,10 +13,10 @@
 #include "core/logging.hpp"
 
 namespace core{
-World::World(Application *papplication):papplication(papplication){
+World::World(Application *papplication, Config *pconfig):papplication(papplication), pconfig(pconfig){
     LOG(INFO) << "Constructing world";
     systems.add<systems::PositionPrinter>();
-    systems.add<systems::RenderSystem>();
+    systems.add<systems::RenderSystem>(pconfig);
     systems.add<systems::EventSystem>(papplication);
     systems.add<systems::CameraSystem>();
     systems.add<systems::PlayerControlSystem>();
