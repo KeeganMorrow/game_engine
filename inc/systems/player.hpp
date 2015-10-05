@@ -13,7 +13,7 @@ namespace systems{
 
 class PlayerControlSystem : public entityx::System<PlayerControlSystem>, public entityx::Receiver<PlayerControlSystem>{
 public:
-    PlayerControlSystem(){}
+    PlayerControlSystem():input_x(0.0), input_y(0.0){}
 
     void configure(entityx::EventManager &event_manager);
 
