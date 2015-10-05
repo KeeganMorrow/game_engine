@@ -1,8 +1,10 @@
 #include "core/world.hpp"
 #include "components/basic.hpp"
 #include "components/render.hpp"
+#include "components/pathfinding.hpp"
 #include "components/player.hpp"
 #include "systems/events.hpp"
+#include "systems/pathfinding.hpp"
 #include "systems/player.hpp"
 #include "systems/rendering.hpp"
 #include "sdlwrap/surface.hpp"
@@ -17,6 +19,7 @@ World::World(Application *papplication):papplication(papplication){
     systems.add<systems::EventSystem>(papplication);
     systems.add<systems::CameraSystem>();
     systems.add<systems::PlayerControlSystem>();
+    systems.add<systems::PathfindingSystem>();
     systems.configure();
 
     LOG(INFO) << "Initializing world";
@@ -38,9 +41,10 @@ World::World(Application *papplication):papplication(papplication){
 
     auto ptex2 = prender->load_texture("resources/testimage.png");
     entityx::Entity ai = entities.create();
-    ai.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 80, 0.0);
+    ai.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 0.0, 0.0);
     ai.assign<components::RenderTexture>(ptex2);
     ai.assign<components::RenderData>(1);
+    ai.assign<components::Pathfinding>(true, 242.0, 400.0);
 
     auto camera = entities.create();
     camera.assign<components::Spacial>(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
@@ -63,6 +67,7 @@ void World::update(entityx::TimeDelta dt) {
     systems.update<systems::EventSystem>(dt);
     systems.update<systems::PlayerControlSystem>(dt);
     systems.update<systems::PositionPrinter>(dt);
+    systems.update<systems::PathfindingSystem>(dt);
 }
 void World::render(entityx::TimeDelta dt) {
     systems.update<systems::CameraSystem>(dt);

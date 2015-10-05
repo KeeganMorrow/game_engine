@@ -10,7 +10,7 @@ set(engine_SRC
     "core/world.cpp"
     "systems/events.cpp"
     "systems/player.cpp"
-    "systems/rendering.cpp"
+    "systems/pathfinding.cpp"
     "systems/rendering.cpp"
     "components/basic.cpp"
 )
