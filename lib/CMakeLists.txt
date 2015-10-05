@@ -1,5 +1,6 @@
 add_subdirectory(entityx)
 add_subdirectory(gmock)
-add_subdirectory(json)
+# Disabled for the time being due to invalid gcc flags when running tests
+#add_subdirectory(json)
 
 
