@@ -8,9 +8,8 @@ using namespace sdlwrap;
 
 TEST(Surface, Constructor){
     bool didexcept = false;
-    Surface s;
     try{
-        s.init(std::string("resources/testimage.png"));
+        Surface s(std::string("resources/testimage.png"));
     }
     catch (exMissingFile &e)
     {
@@ -19,9 +18,8 @@ TEST(Surface, Constructor){
     EXPECT_FALSE(didexcept);
 
     didexcept = false;
-    Surface s2;
     try {
-        s2.init(std::string("notarealfile.png"));
+        Surface s2(std::string("notarealfile.png"));
     }
     catch (exMissingFile &e)
     {
