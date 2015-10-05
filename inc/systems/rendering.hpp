@@ -38,7 +38,7 @@ public:
 
     void draw_object_interpolated(components::RenderTexture &texture, components::Spacial &spacial, float dt);
 
-    std::shared_ptr<sdlwrap::Texture>load_texture(const std::string path);
+    std::shared_ptr<sdlwrap::Texture>load_texture(std::string path);
 
 private:
     components::Spacial &calculate_spacial(const components::Spacial *camera, const components::Spacial *target);

@@ -99,16 +99,17 @@ void RenderSystem::draw_object_interpolated(components::RenderTexture &texture,
     (void)prender->RenderCopy(texture.get_texture().get(), nullptr, &pdst);
 }
 
-std::shared_ptr<sdlwrap::Texture> RenderSystem::load_texture(const std::string path){
+std::shared_ptr<sdlwrap::Texture> RenderSystem::load_texture(std::string path){
     auto find_result = textures.find(path);
     if (find_result != textures.end()){
-        LOG(INFO) << "texture " << path << "already loaded";
+        LOG(INFO) << "texture " << path << " already loaded";
         return find_result->second;
     }
     LOG(INFO) << "creating surface " << path;
     auto surface = sdlwrap::Surface(path);
     LOG(INFO) << "creating texture from surface";
     auto ptexture = std::make_shared<sdlwrap::Texture>(prender, &surface);
+    textures.insert({path, ptexture});
     return ptexture;
 }
 

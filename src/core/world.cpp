@@ -30,11 +30,17 @@ World::World(Application *papplication):papplication(papplication){
     LOG(INFO) << "Initializing entity ";
     auto ptex = prender->load_texture("resources/testimage.png");
     entityx::Entity entity = entities.create();
-    entity.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 80, 0.0);
+    entity.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 0.0, 0.0);
     entity.assign<components::RenderTexture>(ptex);
     entity.assign<components::RenderData>(1);
     entity.assign<components::Player>();
     entity.assign<components::RenderCameraTarget>();
+
+    auto ptex2 = prender->load_texture("resources/testimage.png");
+    entityx::Entity ai = entities.create();
+    ai.assign<components::Spacial>(100.0, 100.0, 200.0, 200.0, 0.0, 80, 0.0);
+    ai.assign<components::RenderTexture>(ptex2);
+    ai.assign<components::RenderData>(1);
 
     auto camera = entities.create();
     camera.assign<components::Spacial>(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
