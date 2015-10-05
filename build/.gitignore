@@ -1,5 +1,6 @@
 ! .gitignore
 ! resources
+! logging.conf
 # Just ignore everything in the build directory!
 *
 
