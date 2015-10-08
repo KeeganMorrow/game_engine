@@ -7,7 +7,7 @@ PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 set(engine_SRC
     "core/application.cpp"
     "core/config.cpp"
-    "core/logging.cpp"
+    "core/logger_manager.cpp"
     "core/world.cpp"
     "systems/events.cpp"
     "systems/player.cpp"
