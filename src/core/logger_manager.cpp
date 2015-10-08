@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iomanip>
+#include "core/logger_manager.hpp"
 #include "core/logging.hpp"
 
 namespace core{

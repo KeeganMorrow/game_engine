@@ -4,7 +4,7 @@
 #include "sdlwrap/window.hpp"
 #include "sdlwrap/render.hpp"
 #include "core/world.hpp"
-#include "core/logging.hpp"
+#include "core/logger_manager.hpp"
 #include "core/config.hpp"
 
 namespace core{

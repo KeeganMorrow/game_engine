@@ -4,7 +4,6 @@
 #include "sdlwrap/window.hpp"
 #include "sdlwrap/render.hpp"
 #include "core/world.hpp"
-#include "core/logging.hpp"
 
 namespace core{
 class Config{
