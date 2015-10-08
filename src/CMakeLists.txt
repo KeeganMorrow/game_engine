@@ -1,9 +1,3 @@
-# Aquire external libraries
-INCLUDE(FindPkgConfig)
-
-PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
-PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
-
 set(engine_SRC
     "core/application.cpp"
     "core/config.cpp"

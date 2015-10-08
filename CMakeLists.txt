@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.3)
 
+# Aquire external libraries
+INCLUDE(FindPkgConfig)
+
 enable_testing()
 project(game_engine CXX)
 
@@ -25,6 +28,11 @@ else()
     message(SEND_ERROR "Unrecognized compiler")
 endif()
 
+# Add packageconfig libraries, use the following to take advantage of these
+# target_link_libraries(example ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
+# target_include_directories(example PUBLIC ${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS})
+PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 add_subdirectory(src)
 add_subdirectory(lib)
 add_subdirectory(test)
