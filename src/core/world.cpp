@@ -28,6 +28,7 @@ World::World(Application *papplication, Config *pconfig):papplication(papplicati
     auto prender = systems.system<systems::RenderSystem>();
     assert (prender != nullptr);
     auto pevent = systems.system<systems::EventSystem>();
+    pevent->load_config(pconfig);
     assert (pevent != nullptr);
     LOG(INFO) << "Initialized systems";
 

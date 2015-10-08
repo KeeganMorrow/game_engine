@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <assert.h>
 #include "systems/player.hpp"
+#include "systems/events.hpp"
 #include "components/player.hpp"
 #include "components/basic.hpp"
 #include "core/application.hpp"
@@ -24,32 +25,32 @@ void PlayerControlSystem::update(entityx::EntityManager &es,
 }
 
 void PlayerControlSystem::configure(entityx::EventManager &event_manager) {
-    event_manager.subscribe<SDL_KeyboardEvent>(*this);
+    event_manager.subscribe<EventKey>(*this);
 }
 
-void PlayerControlSystem::receive(const SDL_KeyboardEvent &event){
+void PlayerControlSystem::receive(const EventKey &event){
     LOG(DEBUG) << "Keypress event recieved";
     if (! event.repeat){
-        if(event.keysym.sym == SDLK_w){
-            if (event.type == SDL_KEYDOWN){
+        if(event.key == KEYS_MOVE_UP){
+            if (event.press){
                 input_y -= 1.0;
             }else{
                 input_y += 1.0;
             }
-        }else if(event.keysym.sym == SDLK_s){
-            if (event.type == SDL_KEYDOWN){
+        }else if(event.key == KEYS_MOVE_DOWN){
+            if (event.press){
                 input_y += 1.0;
             }else{
                 input_y -= 1.0;
             }
-        }else if(event.keysym.sym == SDLK_a){
-            if (event.type == SDL_KEYDOWN){
+        }else if(event.key == KEYS_MOVE_LEFT){
+            if (event.press){
                 input_x -= 1.0;
             }else{
                 input_x += 1.0;
             }
-        }else if(event.keysym.sym == SDLK_d){
-            if (event.type == SDL_KEYDOWN){
+        }else if(event.key == KEYS_MOVE_RIGHT){
+            if (event.press){
                 input_x += 1.0;
             }else{
                 input_x -= 1.0;
